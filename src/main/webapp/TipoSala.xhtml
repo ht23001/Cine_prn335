@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="jakarta.faces.core"
+      xmlns:h="jakarta.faces.html"
+
+>
+
+<h:head>
+    <title>Tipo Sala</title>
+    <style type="text/css">
+        body{
+            background-color: white;
+        }
+        h1{
+            color: black;
+        }
+        table{
+            border-collapse: collapse;
+            background-color: yellow;
+            overflow: hidden;
+            width: 500px;
+            border-radius: 10px;
+        }
+        th, td{
+            font-family: "Montserrat";
+            text-align: left;
+            font-size: 12px;
+        }
+        th{
+            background-color: white;
+            color: black;
+        }
+    </style>
+</h:head>
+
+<h:body>
+
+    <h1>Tipo Sala</h1>
+    
+    <h:form id="frmTabla">
+        <h:dataTable value="#{frmTipoSala.registros}" var="r">
+            <h:column>
+                <f:facet name="header">ID</f:facet>
+                <h:outputText value="#{r.idTipoSala}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">Nombre</f:facet>
+                <h:outputText value="#{r.nombreTipoSala}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">ESTADO</f:facet>
+                <h:outputText value="#{r.activoTipoSala ? 'ACTIVO':'INACTIVO'}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">Expresion Regular</f:facet>
+            </h:column>
+            <h:column>
+                <f:facet name="header">Comentarios</f:facet>
+                <h:outputText value="#{r.comentariosTipoSala}"/>
+            </h:column>
+            <h:column>
+                <h:commandButton value="Selecionar" action="#{frmTipoSala.btnSelecionarRegistroHandler(r.idTipoSala)}"/>
+            </h:column>
+        </h:dataTable>
+        <h:panelGroup>
+            <h:commandButton value="Cancelar" actionListener="#{frmTipoSala.btnCancelarHandler}"/>
+            <h:commandButton value="Nuevo" actionListener="#{frmTipoSala.btnNuevoHandler}" />
+
+        </h:panelGroup>
+    </h:form>
+
+    <h:panelGroup>
+        <h:form id="frmDetalle" rendered="#{not empty frmTipoSala.registro}">
+            <h:panelGrid columns="2" >
+                <h:outputLabel value="ID" for="txtId"/>
+                <h:inputText id="txtId" value="#{frmTipoSala.registro.idTipoSala}" readonly="true" disabled="true"/>
+                <h:outputLabel value="Nombre" for="txtNombre"/>
+                <h:inputText size="70" id="txtNombre" value="#{frmTipoSala.registro.nombreTipoSala}"/>
+                <h:outputLabel for="chkActivo" value="Activo"/>
+                <h:selectBooleanCheckbox id="chkActivo" value="#{frmTipoSala.registro.activoTipoSala}"/>
+                <h:outputLabel for="txtExpresionRegular" value="Expresión Regular"/>
+                <h:inputText id="txtExpresionRegular" value="#{frmTipoSala.registro.expresionRegular}" size="70"/>
+                <h:outputLabel for="txtComentarios" value="Comentarios"/>
+                <h:inputTextarea id="txtComentarios" value="#{frmTipoSala.registro.comentariosTipoSala}" cols="70" rows="3"/>
+            </h:panelGrid>
+            <h:panelGrid>
+                <h:messages showSummary="true" showDetail="true"/>
+                <h:panelGrid>
+
+                    <h:commandButton value="Guardar" actionListener="#{frmTipoSala.btnGuardarHandler}" rendered="#{frmTipoSala.estado=='CREAR'}"/>
+                    <h:commandButton  value="Modificar" actionListener="#{frmTipoSala.btnModificarHandler}" rendered="#{frmTipoSala.estado=='MODIFICAR'}"/>
+                    <h:commandButton  value="Eliminar" actionListener="#{frmTipoSala.btnEliminarHandler}" rendered="#{frmTipoSala.estado=='ELIMINAR'}"/>
+                </h:panelGrid>
+
+
+            </h:panelGrid>
+
+        </h:form>
+    </h:panelGroup>
+
+
+</h:body>
+</html>

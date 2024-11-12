@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence xmlns="https://jakarta.ee/xml/ns/persistence"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="https://jakarta.ee/xml/ns/persistence https://jakarta.ee/xml/ns/persistence/persistence_3_0.xsd"
+             version="3.0">
+    <persistence-unit name="CinePU" transaction-type="JTA">
+        <jta-data-source>jdbc/cine</jta-data-source>
+
+        <!-- Clases de entidad -->
+        <class>sv.edu.ues.occ.ingenieria.prn335_2024.cine.Entity.Asiento</class>
+        <class>sv.edu.ues.occ.ingenieria.prn335_2024.cine.Entity.Asiento</class>
+        <class>sv.edu.ues.occ.ingenieria.prn335_2024.cine.Entity.AsientoCaracteristica</class>
+        <class>sv.edu.ues.occ.ingenieria.prn335_2024.cine.Entity.Factura</class>
+        <class>sv.edu.ues.occ.ingenieria.prn335_2024.cine.Entity.FacturaDetalleProducto</class>
+        <class>sv.edu.ues.occ.ingenieria.prn335_2024.cine.Entity.FacturaDetalleSala</class>
+        <class>sv.edu.ues.occ.ingenieria.prn335_2024.cine.Entity.Pago</class>
+        <class>sv.edu.ues.occ.ingenieria.prn335_2024.cine.Entity.PagoDetalle</class>
+        <class>sv.edu.ues.occ.ingenieria.prn335_2024.cine.Entity.Pelicula</class>
+        <class>sv.edu.ues.occ.ingenieria.prn335_2024.cine.Entity.PeliculaCaracteristica</class>
+        <class>sv.edu.ues.occ.ingenieria.prn335_2024.cine.Entity.Producto</class>
+        <class>sv.edu.ues.occ.ingenieria.prn335_2024.cine.Entity.Programacion</class>
+        <class>sv.edu.ues.occ.ingenieria.prn335_2024.cine.Entity.Reserva</class>
+        <class>sv.edu.ues.occ.ingenieria.prn335_2024.cine.Entity.ReservaDetalle</class>
+        <class>sv.edu.ues.occ.ingenieria.prn335_2024.cine.Entity.Sala</class>
+        <class>sv.edu.ues.occ.ingenieria.prn335_2024.cine.Entity.SalaCaracteristica</class>
+        <class>sv.edu.ues.occ.ingenieria.prn335_2024.cine.Entity.Sucursal</class>
+        <class>sv.edu.ues.occ.ingenieria.prn335_2024.cine.Entity.TipoAsiento</class>
+        <class>sv.edu.ues.occ.ingenieria.prn335_2024.cine.Entity.TipoPago</class>
+        <class>sv.edu.ues.occ.ingenieria.prn335_2024.cine.Entity.TipoPelicula</class>
+        <class>sv.edu.ues.occ.ingenieria.prn335_2024.cine.Entity.TipoProducto</class>
+        <class>sv.edu.ues.occ.ingenieria.prn335_2024.cine.Entity.TipoReserva</class>
+        <class>sv.edu.ues.occ.ingenieria.prn335_2024.cine.Entity.TipoSala</class>
+        <properties>
+            <property name="jakarta.persistence.schema-generation.database.action" value="create"/>
+        </properties>
+    </persistence-unit>
+</persistence>
