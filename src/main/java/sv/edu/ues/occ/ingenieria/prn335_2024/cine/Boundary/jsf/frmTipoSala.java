@@ -104,7 +104,6 @@ public class frmTipoSala implements Serializable {
     public void btnGuardarHandler(ActionEvent actionEvent) {
        this.tsBean.create(registro);
         this.registro=null;
-
         this.registros=tsBean.findRange(0,1000000);
         this.estado=ESTADO_CRUD.NINGUNO;
     }
@@ -128,6 +127,16 @@ public class frmTipoSala implements Serializable {
 
          }
         facesContext.addMessage(null, mensaje);
+    }
+
+    public void btnEliminarHandler(ActionEvent actionEvent){
+        FacesMessage mensaje = new FacesMessage();
+        tsBean.delete(registro.getIdTipoSala());
+        mensaje.setSeverity(FacesMessage.SEVERITY_INFO);
+        mensaje.setSummary("Registro eliminado con exito");
+        facesContext.addMessage(null, mensaje);
+        this.registro=null;
+        this.estado=ESTADO_CRUD.NINGUNO;
     }
 
 

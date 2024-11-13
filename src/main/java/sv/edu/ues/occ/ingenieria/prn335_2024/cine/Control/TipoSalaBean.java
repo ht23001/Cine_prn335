@@ -4,6 +4,7 @@ import jakarta.ejb.LocalBean;
 import jakarta.ejb.Stateless;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
+import jakarta.persistence.TypedQuery;
 import sv.edu.ues.occ.ingenieria.prn335_2024.cine.Entity.TipoSala;
 
 import java.io.Serializable;
@@ -41,7 +42,9 @@ public class TipoSalaBean extends AbscractDataPersistence<TipoSala> implements S
        return em.merge(registro);
     }
 
-    public void delete(TipoSala registro) {
-       em.remove(registro);
+    //public Integer obtenerMaxIdTipoSala() { TypedQuery<Integer> query = em.createNamedQuery("TipoSala.IdMaximo", Integer.class); Integer maxId = query.getSingleResult(); return maxId; }
+
+    public void delete(int idTipoSala) {
+       em.remove(em.find(TipoSala.class, idTipoSala));
     }
 }

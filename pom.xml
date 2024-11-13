@@ -47,6 +47,7 @@
         </dependency>
     </dependencies>
 
+
     <build>
         <plugins>
             <plugin>
@@ -59,8 +60,8 @@
                 <artifactId>liberty-maven-plugin</artifactId>
                 <version>3.8.2</version>
                 <configuration>
-                    <installDirectory>/home/severus/Downloads/OpenLIberty/wlp10_24_0_0_8</installDirectory>
-                    <serverName>servidorsito</serverName>
+                    <installDirectory>/home/m26enamorado/Openliberty/wlp10_24_0_0_8</installDirectory>
+                    <serverName>prn335_2024</serverName>
                 </configuration>
             </plugin>
             <plugin>

@@ -6,6 +6,11 @@ import jakarta.validation.constraints.*;
 
 @Entity
 @Table(name = "tipo_sala")
+@NamedQueries({
+        @NamedQuery(
+                name="TipoSala.IdMaximo",
+                query = "SELECT max (ts.idTipoSala) FROM TipoSala ts")
+})
 public class TipoSala {
 
     @Id

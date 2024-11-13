@@ -2,9 +2,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:f="jakarta.faces.core"
-      xmlns:h="jakarta.faces.html"
-
->
+      xmlns:h="jakarta.faces.html">
 
 <h:head>
     <title>Tipo Sala</title>
@@ -17,19 +15,20 @@
         }
         table{
             border-collapse: collapse;
-            background-color: yellow;
+            background-color: white;
             overflow: hidden;
             width: 500px;
             border-radius: 10px;
         }
         th, td{
-            font-family: "Montserrat";
+            font-family: "Montserrat", sans-serif;
             text-align: left;
             font-size: 12px;
+            padding: 10px;
         }
         th{
-            background-color: white;
-            color: black;
+            background-color: #7691ab;
+            color: white;
         }
     </style>
 </h:head>
@@ -37,7 +36,6 @@
 <h:body>
 
     <h1>Tipo Sala</h1>
-    
     <h:form id="frmTabla">
         <h:dataTable value="#{frmTipoSala.registros}" var="r">
             <h:column>
@@ -60,7 +58,10 @@
                 <h:outputText value="#{r.comentariosTipoSala}"/>
             </h:column>
             <h:column>
-                <h:commandButton value="Selecionar" action="#{frmTipoSala.btnSelecionarRegistroHandler(r.idTipoSala)}"/>
+                <h:commandButton value="Selecionar"
+                                 action="#{frmTipoSala.btnSelecionarRegistroHandler(r.idTipoSala)}">
+                    <f:ajax render=":pnlDetalle" execute="@form"></f:ajax>
+                </h:commandButton>
             </h:column>
         </h:dataTable>
         <h:panelGroup>
@@ -70,9 +71,9 @@
         </h:panelGroup>
     </h:form>
 
-    <h:panelGroup>
-        <h:form id="frmDetalle" rendered="#{not empty frmTipoSala.registro}">
-            <h:panelGrid columns="2" >
+    <h:panelGroup id="pnlDetalle">
+        <h:form id="frmDetalle">
+            <h:panelGrid columns="2" rendered="#{not empty frmTipoSala.registro}">
                 <h:outputLabel value="ID" for="txtId"/>
                 <h:inputText id="txtId" value="#{frmTipoSala.registro.idTipoSala}" readonly="true" disabled="true"/>
                 <h:outputLabel value="Nombre" for="txtNombre"/>
@@ -83,22 +84,22 @@
                 <h:inputText id="txtExpresionRegular" value="#{frmTipoSala.registro.expresionRegular}" size="70"/>
                 <h:outputLabel for="txtComentarios" value="Comentarios"/>
                 <h:inputTextarea id="txtComentarios" value="#{frmTipoSala.registro.comentariosTipoSala}" cols="70" rows="3"/>
-            </h:panelGrid>
-            <h:panelGrid>
-                <h:messages showSummary="true" showDetail="true"/>
                 <h:panelGrid>
-
+                    <h:messages showSummary="true" showDetail="true"/>
                     <h:commandButton value="Guardar" actionListener="#{frmTipoSala.btnGuardarHandler}" rendered="#{frmTipoSala.estado=='CREAR'}"/>
-                    <h:commandButton  value="Modificar" actionListener="#{frmTipoSala.btnModificarHandler}" rendered="#{frmTipoSala.estado=='MODIFICAR'}"/>
-                    <h:commandButton  value="Eliminar" actionListener="#{frmTipoSala.btnEliminarHandler}" rendered="#{frmTipoSala.estado=='ELIMINAR'}"/>
+                    <h:commandButton value="Modificar" actionListener="#{frmTipoSala.btnModificarHandler}" rendered="#{frmTipoSala.estado=='MODIFICAR'}"/>
+                    <h:commandButton value="Eliminar" actionListener="#{frmTipoSala.btnEliminarHandler}" rendered="#{frmTipoSala.estado=='MODIFICAR'}"/>
+                    <h:panelGrid>
+                        <h:message showSummary="true" showDetail="true" for=""/>
+                    </h:panelGrid>
                 </h:panelGrid>
-
-
             </h:panelGrid>
+
+
 
         </h:form>
-    </h:panelGroup>
 
+    </h:panelGroup>
 
 </h:body>
 </html>
