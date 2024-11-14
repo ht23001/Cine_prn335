@@ -1,16 +1,38 @@
 package sv.edu.ues.occ.ingenieria.prn335_2024.cine.Entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
+
+import java.util.List;
 
 @Entity
 @Table(name = "tipo_reserva")
+@NamedQueries({
+        @NamedQuery(
+                name="TipoReserva.IdMaximo",
+                query = "SELECT max (tr.idTipoReserva) FROM TipoReserva tr")
+})
 public class TipoReserva {
     @Id
     @Column(name = "id_tipo_reserva", nullable = false)
     private Integer idTipoReserva;
 
-    @Size(max = 155)
+
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "idTipoReserva")
+    public List<Reserva> ReservaList;
+
+    public List<Reserva> getReservaList() {
+        return ReservaList;
+    }
+
+    public void setReservaList(List<Reserva> reservaList) {
+        ReservaList = reservaList;
+    }
+
+
+    @NotBlank
+    @Size(max = 155, min = 3)
     @Column(name = "nombre", length = 155)
     private String nombre;
 

@@ -4,12 +4,14 @@ import jakarta.ejb.LocalBean;
 import jakarta.ejb.Stateless;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
+import jakarta.persistence.TypedQuery;
 import sv.edu.ues.occ.ingenieria.prn335_2024.cine.Entity.PeliculaCaracteristica;
 import sv.edu.ues.occ.ingenieria.prn335_2024.cine.Entity.TipoReserva;
 import sv.edu.ues.occ.ingenieria.prn335_2024.cine.Entity.TipoSala;
 
 
 import java.io.Serializable;
+import java.util.List;
 
 @Stateless
 @LocalBean
@@ -38,7 +40,9 @@ public class TipoReservaBean extends AbscractDataPersistence<TipoReserva> implem
         return em.merge(registro);
     }
 
-    //public Integer obtenerMaxIdTipoSala() { TypedQuery<Integer> query = em.createNamedQuery("TipoSala.IdMaximo", Integer.class); Integer maxId = query.getSingleResult(); return maxId; }
+    public List<TipoReserva> findAll() { return em.createQuery("SELECT t FROM TipoReserva t", TipoReserva.class).getResultList(); }
+
+    public Integer obtenerMaxIdTipoReserva() { TypedQuery<Integer> query = em.createNamedQuery("TipoReserva.IdMaximo", Integer.class); Integer maxId = query.getSingleResult(); return maxId; }
 
     public void delete(int idTipoReserva) {
         em.remove(em.find(TipoSala.class, idTipoReserva));

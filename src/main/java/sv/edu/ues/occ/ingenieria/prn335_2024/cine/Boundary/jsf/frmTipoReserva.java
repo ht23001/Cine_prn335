@@ -3,6 +3,9 @@ package sv.edu.ues.occ.ingenieria.prn335_2024.cine.Boundary.jsf;
 
 import jakarta.annotation.PostConstruct;
 import jakarta.enterprise.context.SessionScoped;
+import jakarta.faces.application.FacesMessage;
+import jakarta.faces.context.FacesContext;
+import jakarta.faces.event.ActionEvent;
 import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
@@ -21,7 +24,14 @@ import java.util.Map;
 public class frmTipoReserva implements Serializable {
 
     @Inject
+    FacesContext facesContext;
+
+    @Inject
     TipoReservaBean dataBean;
+
+
+    ESTADO_CRUD estado;
+
 
     LazyDataModel<TipoReserva> modelo;
 
@@ -84,7 +94,7 @@ public class frmTipoReserva implements Serializable {
 
     }
 
-    TipoReserva registro;
+    TipoReserva registroT;
 
     public LazyDataModel<TipoReserva> getModelo() {
         return modelo;
@@ -97,10 +107,38 @@ public class frmTipoReserva implements Serializable {
 
 
     public TipoReserva getRegistro() {
-        return registro;
+        return registroT;
     }
 
     public void setRegistro(TipoReserva registro) {
-        this.registro = registro;
+        this.registroT = registro;
     }
+
+    public void btnNuevoHandler(ActionEvent actionEvent){
+        this.registroT= new TipoReserva();
+        this.registroT.setIdTipoReserva(dataBean.obtenerMaxIdTipoReserva()+1);
+        this.registroT.setActivo(true);
+        this.estado=ESTADO_CRUD.CREAR;
+
+    }
+
+    public void btnGuardarHandler(ActionEvent actionEvent) {
+        try {
+            this.dataBean.create(registroT);
+            this.registroT=null;
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Registro guardado"));
+        } catch (Exception e) {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", "No se pudo guardar el registro"));
+            e.printStackTrace();
+        }
+        this.registroT = null;
+        this.estado = ESTADO_CRUD.NINGUNO;
+    }
+
+
+    public void btnModificarHandler(ActionEvent actionEvent){
+
+    }
+
+
 }

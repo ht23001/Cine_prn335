@@ -23,6 +23,8 @@
                 selection="#{frmTipoReserva.registro}"
                 paginator="true"
         >
+            <p:ajax event="rowSelect"  update=":pnlDetalle" process="@this"
+                    />
             <p:column headerText="ID">
                 <h:outputText value="#{r.idTipoReserva}"/>
             </p:column>
@@ -37,7 +39,44 @@
             </p:column>
 
         </p:dataTable>
+        <h:panelGroup>
+            <h:panelGrid>
+                <p:commandButton value="Nuevo" ajax="true"
+                                 process="@this"
+                                 update=":pnlDetalle"
+                                 actionListener="#{frmTipoReserva.btnNuevoHandler}"
+
+                />
+            </h:panelGrid>
+            <p:messages showSummary="true" showDetail="true"/>
+        </h:panelGroup>
     </h:form>
+        <h:panelGroup id="pnlDetalle" styleClass="detalle">
+            <h:form  id="frmDetalle" styleClass="detalle">
+                <h:panelGrid columns="2">
+                    <p:outputLabel value="ID" for="txtId"/>
+                    <p:inputText id="txtId" value="#{frmTipoReserva.registro.idTipoReserva}" readonly="true" disabled="true"/>
+                    <p:outputLabel value="Nombre" for="txtNombre"/>
+                    <p:inputText size="70" id="txtNombre" value="#{frmTipoReserva.registro.nombre}"/>
+                    <p:outputLabel for="chkActivo" value="Activo"/>
+                    <p:selectBooleanCheckbox id="chkActivo" value="#{frmTipoReserva.registro.activo}"/>
+                    <p:outputLabel for="txtComentarios" value="Comentarios"/>
+                    <p:inputTextarea id="txtComentarios" value="#{frmTipoReserva.registro.comentarios}" cols="70" rows="3"/>
+                </h:panelGrid>
+                <h:panelGrid columns="3">
+                    <p:commandButton value="Guardar" ajax="true"
+                                     process="@form"
+                                     update=":frmTabla"
+                                     actionListener="#{frmTipoReserva.btnGuardarHandler}"
+                    />
+                    <p:messages showSummary="true" showDetail="true"/>
+                </h:panelGrid>
+
+
+            </h:form>
+
+        </h:panelGroup>
+
 </h:body>
 
 </html>
