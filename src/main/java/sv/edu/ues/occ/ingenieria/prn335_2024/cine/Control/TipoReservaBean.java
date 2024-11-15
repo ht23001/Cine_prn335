@@ -5,7 +5,6 @@ import jakarta.ejb.Stateless;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.TypedQuery;
-import sv.edu.ues.occ.ingenieria.prn335_2024.cine.Entity.PeliculaCaracteristica;
 import sv.edu.ues.occ.ingenieria.prn335_2024.cine.Entity.TipoReserva;
 import sv.edu.ues.occ.ingenieria.prn335_2024.cine.Entity.TipoSala;
 
@@ -42,10 +41,10 @@ public class TipoReservaBean extends AbscractDataPersistence<TipoReserva> implem
 
     public List<TipoReserva> findAll() { return em.createQuery("SELECT t FROM TipoReserva t", TipoReserva.class).getResultList(); }
 
-    public Integer obtenerMaxIdTipoReserva() { TypedQuery<Integer> query = em.createNamedQuery("TipoReserva.IdMaximo", Integer.class); Integer maxId = query.getSingleResult(); return maxId; }
+    public Integer obtenerMaxIdTipoReserva(TipoReserva registro) { TypedQuery<Integer> query = em.createNamedQuery("TipoReserva.IdMaximo", Integer.class); Integer maxId = query.getSingleResult(); return maxId; }
 
     public void delete(int idTipoReserva) {
-        em.remove(em.find(TipoSala.class, idTipoReserva));
+        em.remove(em.find(TipoReserva.class, idTipoReserva));
     }
 }
 

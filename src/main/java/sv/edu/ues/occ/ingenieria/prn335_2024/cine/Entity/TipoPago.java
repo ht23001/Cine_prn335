@@ -1,31 +1,38 @@
 package sv.edu.ues.occ.ingenieria.prn335_2024.cine.Entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
+
+import java.util.List;
 
 @Entity
 @Table(name = "tipo_pago")
+@NamedQueries({
+        @NamedQuery(
+                name="TipoPago.IdMaximo",
+                query = "SELECT max (tp.idTipoPago) FROM TipoPago tp")
+})
 public class TipoPago {
     @Id
     @Column(name = "id_tipo_pago", nullable = false)
-    private Integer id;
+    private Integer idTipoPago;
 
-    @Size(max = 155)
+
+    @NotBlank
+    @Size(max = 155, min = 3)
     @Column(name = "nombre", length = 155)
     private String nombre;
 
     @Column(name = "activo")
     private Boolean activo;
 
-    public Integer getId() {
-        return id;
+    public Integer getIdTipoPago() {
+        return idTipoPago;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setIdTipoPago(Integer id) {
+        this.idTipoPago = id;
     }
 
     public String getNombre() {

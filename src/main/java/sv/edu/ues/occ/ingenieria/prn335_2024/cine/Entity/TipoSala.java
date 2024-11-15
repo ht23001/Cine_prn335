@@ -3,6 +3,8 @@ package sv.edu.ues.occ.ingenieria.prn335_2024.cine.Entity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 
+import java.util.List;
+
 
 @Entity
 @Table(name = "tipo_sala")
@@ -15,8 +17,19 @@ public class TipoSala {
 
     @Id
     @Column(name = "id_tipo_sala", nullable = false)
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idTipoSala;
+
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "idTipoSala")
+    public List<SalaCaracteristica> SalaCAracteristicaList;
+
+    public List<SalaCaracteristica> getSalaCAracteristicaList() {
+        return SalaCAracteristicaList;
+    }
+
+    public void setSalaCAracteristicaList(List<SalaCaracteristica> salaCAracteristicaList) {
+        SalaCAracteristicaList = salaCAracteristicaList;
+    }
+
 
     // @Pattern(regexp = "\\d\\d\\d\\d\\d\\d\\d\\d-\\d", message = "agrega dui puto")
     @NotBlank(message = "Debe ingresar nombre valido")
@@ -45,8 +58,8 @@ public class TipoSala {
         return idTipoSala;
     }
 
-    public void setIdTipoSala(Integer id) {
-        this.idTipoSala = id;
+    public void setIdTipoSala(Integer idTipoSala) {
+        this.idTipoSala = idTipoSala;
     }
 
     public String getNombreTipoSala() {

@@ -3,6 +3,7 @@ package sv.edu.ues.occ.ingenieria.prn335_2024.cine.Control;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.Query;
+import jakarta.persistence.TypedQuery;
 import sv.edu.ues.occ.ingenieria.prn335_2024.cine.Entity.Sala;
 
 import java.io.Serializable;
@@ -44,4 +45,5 @@ SalaBean extends AbscractDataPersistence<Sala> implements Serializable {
         }
         return Collections.emptyList();
     }
+
 }

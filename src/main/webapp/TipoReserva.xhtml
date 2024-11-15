@@ -1,83 +1,107 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<html xmlns="http://www.w3.org/1999/xhtml"
+<f:composition xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="jakarta.faces.html"
-      xmlns:f="jakarta.faces.core"
+      xmlns:c="jakarta.faces.core"
       xmlns:p="primefaces"
-      >
+      xmlns:f="jakarta.faces.facelets"
+               template="WEB-INF/templates/principal.xhtml"
+>
 
 
-<h:head>
-    <title>Tittle</title>
+<f:define name="titulo">
+    TIPO RESERVA
+</f:define>
 
-</h:head>
+<f:define name="cuerpo">
+    <h:panelGrid>
+        <h1>TIPO RESERVA</h1>
+        <h:panelGroup id="pnlTabla">
+            <h:form id="frmTabla">
+                <h:panelGrid>
+                    <p:dataTable
+                            value="#{frmTipoReserva.modelo}"
+                            var="r"
+                            rows="10"
+                            lazy="true"
+                            selectionMode="single"
+                            selection="#{frmTipoReserva.registro}"
+                            paginator="true"
+                    >
+                        <p:ajax event="rowSelect"  update=":pnlDetalle" process="@this" oncomplete="PF('customerDialog').show()"
+                        />
+                        <p:column headerText="ID">
+                            <h:outputText value="#{r.idTipoReserva}"/>
+                        </p:column>
+                        <p:column headerText="Nombre">
+                            <h:outputText value="#{r.nombre}"/>
+                        </p:column>
+                        <p:column headerText="Estado">
+                            <h:outputText value="#{r.activo?'ACTIVO':'INACTIVO'}"/>
+                        </p:column>
+                        <p:column headerText="Comentarios">
+                            <h:outputText value="#{r.comentarios}"/>
+                        </p:column>
 
-<h:body>
-    <h:form id="frmTabla">
-        <p:dataTable
-                value="#{frmTipoReserva.modelo}"
-                var="r"
-                rows="10"
-                lazy="true"
-                selectionMode="single"
-                selection="#{frmTipoReserva.registro}"
-                paginator="true"
-        >
-            <p:ajax event="rowSelect"  update=":pnlDetalle" process="@this"
-                    />
-            <p:column headerText="ID">
-                <h:outputText value="#{r.idTipoReserva}"/>
-            </p:column>
-            <p:column headerText="Nombre">
-                <h:outputText value="#{r.nombre}"/>
-            </p:column>
-            <p:column headerText="Estado">
-                <h:outputText value="#{r.activo?'ACTIVO':'INACTIVO'}"/>
-            </p:column>
-            <p:column headerText="Comentarios">
-                <h:outputText value="#{r.comentarios}"/>
-            </p:column>
-
-        </p:dataTable>
-        <h:panelGroup>
-            <h:panelGrid>
-                <p:commandButton value="Nuevo" ajax="true"
-                                 process="@this"
-                                 update=":pnlDetalle"
-                                 actionListener="#{frmTipoReserva.btnNuevoHandler}"
-
-                />
-            </h:panelGrid>
-            <p:messages showSummary="true" showDetail="true"/>
-        </h:panelGroup>
-    </h:form>
-        <h:panelGroup id="pnlDetalle" styleClass="detalle">
-            <h:form  id="frmDetalle" styleClass="detalle">
-                <h:panelGrid columns="2">
-                    <p:outputLabel value="ID" for="txtId"/>
-                    <p:inputText id="txtId" value="#{frmTipoReserva.registro.idTipoReserva}" readonly="true" disabled="true"/>
-                    <p:outputLabel value="Nombre" for="txtNombre"/>
-                    <p:inputText size="70" id="txtNombre" value="#{frmTipoReserva.registro.nombre}"/>
-                    <p:outputLabel for="chkActivo" value="Activo"/>
-                    <p:selectBooleanCheckbox id="chkActivo" value="#{frmTipoReserva.registro.activo}"/>
-                    <p:outputLabel for="txtComentarios" value="Comentarios"/>
-                    <p:inputTextarea id="txtComentarios" value="#{frmTipoReserva.registro.comentarios}" cols="70" rows="3"/>
-                </h:panelGrid>
-                <h:panelGrid columns="3">
-                    <p:commandButton value="Guardar" ajax="true"
-                                     process="@form"
-                                     update=":frmTabla"
-                                     actionListener="#{frmTipoReserva.btnGuardarHandler}"
-                    />
-                    <p:messages showSummary="true" showDetail="true"/>
+                    </p:dataTable>
                 </h:panelGrid>
 
-
+                    <p:growl life="5000"/>
+                    <h:panelGrid columns="#{frmTipoReserva.estado!='NINGUNO'?'2':'1'}">
+                        <p:commandButton ajax="true"
+                                         actionListener="#{frmTipoReserva.btnNuevoHandler}"
+                                         value="Nuevo"
+                                         process="@this" update=":pnlDetalle :pnlTabla"
+                                         oncomplete="PF('customerDialog').show()"/>
+                    </h:panelGrid>
             </h:form>
-
+            <h:panelGroup id="pnlDetalle" >
+                <p:dialog header="Tipo Resereva" widgetVar="customerDialog" modal="true"
+                          showEffect="fade" hideEffect="fade" resizable="false" id="dlgDetalle">
+                    <h:form id="frmDetalle" >
+                        <h:panelGrid>
+                            <h:panelGrid columns="2">
+                                <p:outputLabel value="ID" for="txtId"/>
+                                <p:inputText id="txtId" value="#{frmTipoReserva.registro.idTipoReserva}" readonly="true" disabled="true"/>
+                                <p:outputLabel value="Nombre" for="txtNombre"/>
+                                <p:inputText size="70" id="txtNombre" value="#{frmTipoReserva.registro.nombre}"/>
+                                <p:outputLabel for="chkActivo" value="Activo"/>
+                                <p:selectBooleanCheckbox id="chkActivo" value="#{frmTipoReserva.registro.activo}"/>
+                                <p:outputLabel for="txtComentarios" value="Comentarios"/>
+                                <p:inputTextarea id="txtComentarios" value="#{frmTipoReserva.registro.comentarios}" cols="70" rows="3"/>
+                            </h:panelGrid>
+                            <p:messages showSummary="true" showDetail="true"/>
+                            <h:panelGrid columns="4">
+                                <p:commandButton value="Guardar" ajax="true"
+                                                 process="@form"
+                                                 rendered="#{frmTipoReserva.estado=='CREAR'}"
+                                                 update=":pnlDetalle :pnlTabla"
+                                                 actionListener="#{frmTipoReserva.btnGuardarHandler}"/>
+                                <p:commandButton ajax="true"
+                                                 actionListener="#{frmTipoReserva.btnCancelarHandler}"
+                                                 value="Cancelar"
+                                                 process="@this" update=":pnlDetalle :pnlTabla"
+                                                 rendered="true"
+                                />
+                                <p:commandButton value="Modificar" ajax="true"
+                                                 process="@form"
+                                                 update=":pnlDetalle :pnlTabla"
+                                                 rendered="#{frmTipoReserva.estado!='CREAR'}"
+                                                 actionListener="#{frmTipoReserva.btnModificarHandler}"/>
+                                <p:commandButton value="Eliminar" ajax="true"
+                                                 process="@form"
+                                                 update=":pnlDetalle :pnlTabla"
+                                                 rendered="#{frmTipoReserva.estado!='CREAR'}"
+                                                 actionListener="#{frmTipoReserva.btnEliminarHandler}"/>
+                            </h:panelGrid>
+                        </h:panelGrid>
+                    </h:form>
+                </p:dialog>
+            </h:panelGroup>
         </h:panelGroup>
+    </h:panelGrid>
 
-</h:body>
+</f:define>
 
-</html>
+</f:composition>
 

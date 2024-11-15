@@ -6,9 +6,9 @@ import jakarta.enterprise.context.SessionScoped;
 import jakarta.faces.application.FacesMessage;
 import jakarta.faces.context.FacesContext;
 import jakarta.faces.event.ActionEvent;
-import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
+import org.primefaces.event.SelectEvent;
 import org.primefaces.model.FilterMeta;
 import org.primefaces.model.LazyDataModel;
 import org.primefaces.model.SortMeta;
@@ -29,7 +29,6 @@ public class frmTipoReserva implements Serializable {
     @Inject
     TipoReservaBean dataBean;
 
-
     ESTADO_CRUD estado;
 
 
@@ -37,7 +36,8 @@ public class frmTipoReserva implements Serializable {
 
 
      @PostConstruct
-    public void inicializar(){
+    public void init(){
+         estado=ESTADO_CRUD.MODIFICAR;
          modelo=new LazyDataModel<TipoReserva>() {
 
              @Override public String getRowKey(TipoReserva object) {
@@ -94,7 +94,8 @@ public class frmTipoReserva implements Serializable {
 
     }
 
-    TipoReserva registroT;
+    TipoReserva registro;
+
 
     public LazyDataModel<TipoReserva> getModelo() {
         return modelo;
@@ -107,38 +108,77 @@ public class frmTipoReserva implements Serializable {
 
 
     public TipoReserva getRegistro() {
-        return registroT;
+        return registro;
     }
 
     public void setRegistro(TipoReserva registro) {
-        this.registroT = registro;
+        this.registro = registro;
     }
 
+    public void onRowSelect(SelectEvent<TipoReserva> event) {
+        registro = event.getObject();
+        estado = ESTADO_CRUD.MODIFICAR;
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Fila Seleccionada", "ID: " + registro.getIdTipoReserva())); }
+
     public void btnNuevoHandler(ActionEvent actionEvent){
-        this.registroT= new TipoReserva();
-        this.registroT.setIdTipoReserva(dataBean.obtenerMaxIdTipoReserva()+1);
-        this.registroT.setActivo(true);
+        this.registro = new TipoReserva();
+        this.registro.setIdTipoReserva(dataBean.obtenerMaxIdTipoReserva(registro)+1);
+        this.registro.setActivo(true);
         this.estado=ESTADO_CRUD.CREAR;
 
     }
 
     public void btnGuardarHandler(ActionEvent actionEvent) {
         try {
-            this.dataBean.create(registroT);
-            this.registroT=null;
+            this.dataBean.create(registro);
+            this.registro =null;
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Registro guardado"));
         } catch (Exception e) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", "No se pudo guardar el registro"));
             e.printStackTrace();
         }
-        this.registroT = null;
-        this.estado = ESTADO_CRUD.NINGUNO;
+        this.registro = null;
+        this.estado = ESTADO_CRUD.MODIFICAR;
     }
 
-
-    public void btnModificarHandler(ActionEvent actionEvent){
-
+    public void btnEliminarHandler(ActionEvent actionEvent){
+        FacesMessage mensaje = new FacesMessage();
+        dataBean.delete(registro.getIdTipoReserva());
+        mensaje.setSeverity(FacesMessage.SEVERITY_INFO);
+        mensaje.setSummary("Registro eliminado con exito");
+        facesContext.addMessage(null, mensaje);
+        this.registro =null;
+        this.estado=ESTADO_CRUD.MODIFICAR;
     }
 
+    public void btnCancelarHandler(ActionEvent actionEvent){
 
+        this.registro = null;
+        this.estado=ESTADO_CRUD.MODIFICAR;
+    }
+
+    public void btnModificarHandler(ActionEvent actionEvent) {
+        TipoReserva actualizado= dataBean.update(registro);
+        FacesMessage mensaje= new FacesMessage();
+        if(actualizado!=null){
+            this.registro =null;
+            this.estado=ESTADO_CRUD.MODIFICAR;
+            mensaje.setSeverity(FacesMessage.SEVERITY_INFO);
+            mensaje.setSummary("Registro modificado con exito");
+
+        }else {
+            mensaje.setSeverity(FacesMessage.SEVERITY_ERROR);
+            mensaje.setSummary("NO se pudo guardar el registro, revise datos");
+
+        }
+        facesContext.addMessage(null, mensaje);
+    }
+
+    public ESTADO_CRUD getEstado() {
+        return estado;
+    }
+
+    public void setEstado(ESTADO_CRUD estado) {
+        this.estado = estado;
+    }
 }

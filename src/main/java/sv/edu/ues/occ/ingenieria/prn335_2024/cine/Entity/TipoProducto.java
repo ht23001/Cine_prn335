@@ -1,16 +1,23 @@
 package sv.edu.ues.occ.ingenieria.prn335_2024.cine.Entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
 @Entity
 @Table(name = "tipo_producto")
+@NamedQueries({
+        @NamedQuery(
+                name="TipoProducto.IdMaximo",
+                query = "SELECT max(tp.idTipoProducto) FROM TipoProducto tp")
+})
 public class TipoProducto {
     @Id
     @Column(name = "id_tipo_producto", nullable = false)
-    private Integer id;
+    private Integer idTipoProducto;
 
-    @Size(max = 155)
+    @NotBlank
+    @Size(max = 155, min = 3)
     @Column(name = "nombre", length = 155)
     private String nombre;
 
@@ -21,19 +28,19 @@ public class TipoProducto {
     @Column(name = "comentarios")
     private String comentarios;
 
-    public Integer getId() {
-        return id;
+    public Integer getIdTipoProducto() {
+        return idTipoProducto;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setIdTipoProducto(Integer idTipoProducto) {
+        this.idTipoProducto = idTipoProducto;
     }
 
-    public String getNombre() {
+    public @NotBlank @Size(max = 155, min = 3) String getNombre() {
         return nombre;
     }
 
-    public void setNombre(String nombre) {
+    public void setNombre(@NotBlank @Size(max = 155, min = 3) String nombre) {
         this.nombre = nombre;
     }
 
@@ -52,5 +59,4 @@ public class TipoProducto {
     public void setComentarios(String comentarios) {
         this.comentarios = comentarios;
     }
-
 }

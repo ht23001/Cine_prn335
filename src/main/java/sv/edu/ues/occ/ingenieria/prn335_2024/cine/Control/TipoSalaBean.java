@@ -42,9 +42,11 @@ public class TipoSalaBean extends AbscractDataPersistence<TipoSala> implements S
        return em.merge(registro);
     }
 
-    //public Integer obtenerMaxIdTipoSala() { TypedQuery<Integer> query = em.createNamedQuery("TipoSala.IdMaximo", Integer.class); Integer maxId = query.getSingleResult(); return maxId; }
+    public Integer obtenerMaxIdTipoSala(TipoSala registro) { TypedQuery<Integer> query = em.createNamedQuery("TipoSala.IdMaximo", Integer.class); Integer maxId = query.getSingleResult(); return maxId; }
 
     public void delete(int idTipoSala) {
        em.remove(em.find(TipoSala.class, idTipoSala));
     }
+
+    public long count() { return em.createQuery("SELECT COUNT(t) FROM TipoSala t", Long.class).getSingleResult(); }
 }

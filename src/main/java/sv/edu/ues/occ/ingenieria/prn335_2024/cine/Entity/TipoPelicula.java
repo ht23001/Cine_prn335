@@ -1,16 +1,23 @@
 package sv.edu.ues.occ.ingenieria.prn335_2024.cine.Entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
 @Entity
 @Table(name = "tipo_pelicula")
+@NamedQueries({
+        @NamedQuery(
+                name="TipoPelicula.IdMaximo",
+                query = "SELECT max (tp.idTipoPelicula) FROM TipoPelicula tp")
+})
 public class TipoPelicula {
     @Id
     @Column(name = "id_tipo_pelicula", nullable = false)
-    private Integer id;
+    private Integer idTipoPelicula;
 
-    @Size(max = 155)
+    @NotBlank
+    @Size(max = 155, min = 3)
     @Column(name = "nombre", length = 155)
     private String nombre;
 
@@ -25,12 +32,12 @@ public class TipoPelicula {
     @Column(name = "expresion_regular")
     private String expresionRegular;
 
-    public Integer getId() {
-        return id;
+    public Integer getIdTipoPelicula() {
+        return idTipoPelicula;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setIdTipoPelicula(Integer id) {
+        this.idTipoPelicula = id;
     }
 
     public String getNombre() {

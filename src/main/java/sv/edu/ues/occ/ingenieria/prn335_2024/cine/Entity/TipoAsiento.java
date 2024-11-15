@@ -1,16 +1,39 @@
 package sv.edu.ues.occ.ingenieria.prn335_2024.cine.Entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
+
+import java.util.List;
 
 @Entity
 @Table(name = "tipo_asiento")
+@NamedQueries({
+        @NamedQuery(
+                name="TipoAsiento.IdMaximo",
+                query = "SELECT max (ta.idTipoAsiento) FROM TipoAsiento ta")
+})
 public class TipoAsiento {
     @Id
     @Column(name = "id_tipo_asiento", nullable = false)
-    private Integer id;
 
-    @Size(max = 155)
+    private Integer idTipoAsiento;
+
+
+    @OneToMany (fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "idTipoAsiento")
+    public List<AsientoCaracteristica> AsientoCaracteristicaList;
+
+    public List<AsientoCaracteristica> getAsientoCaracteristicaList() {
+        return AsientoCaracteristicaList;
+    }
+
+    public void setAsientoCaracteristicaList(List<AsientoCaracteristica> asientoCaracteristicaList) {
+        AsientoCaracteristicaList = asientoCaracteristicaList;
+    }
+
+
+    @NotBlank
+    @Size(max = 155, min = 3)
     @Column(name = "nombre", length = 155)
     private String nombre;
 
@@ -25,12 +48,18 @@ public class TipoAsiento {
     @Column(name = "expresion_regular")
     private String expresionRegular;
 
-    public Integer getId() {
-        return id;
+
+    public TipoAsiento(int idTipoAsiento){
+        this.idTipoAsiento = idTipoAsiento;
+    }
+    public TipoAsiento(){}
+
+    public Integer getIdTipoAsiento() {
+        return idTipoAsiento;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setIdTipoAsiento(Integer idTipoAsiento) {
+        this.idTipoAsiento = idTipoAsiento;
     }
 
     public String getNombre() {
