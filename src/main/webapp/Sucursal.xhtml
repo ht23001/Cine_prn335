@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+    <title>Gestión de Sucursales</title>
+</h:head>
+<h:body>
+    <h:form id="frmSucursal">
+        <!-- Tabla para mostrar las sucursales -->
+        <p:dataTable id="sucursalTable"
+                     value="#{frmSucursal.modelo}"
+                     var="sucursal"
+                     lazy="true"
+                     paginator="true"
+                     rows="10"
+                     rowKey="#{sucursal.idSucursal}"
+                     selection="#{frmSucursal.registro}"
+                     selectionMode="single">
+
+            <!-- Eventos AJAX -->
+            <p:ajax event="rowSelect" update="detallePanel" />
+
+            <!-- Columnas de la tabla -->
+            <p:column headerText="ID">
+                <h:outputText value="#{sucursal.idSucursal}" />
+            </p:column>
+
+            <p:column headerText="Nombre">
+                <h:outputText value="#{sucursal.nombreSucursal}" />
+            </p:column>
+
+            <p:column headerText="Latitud">
+                <h:outputText value="#{sucursal.latitudSucursal}" />
+            </p:column>
+
+            <p:column headerText="Longitud">
+                <h:outputText value="#{sucursal.longitudSucursal}" />
+            </p:column>
+
+            <p:column headerText="Activo">
+                <h:outputText value="#{sucursal.activoSucursal ? 'Sí' : 'No'}" />
+            </p:column>
+
+            <p:column headerText="Comentarios">
+                <h:outputText value="#{sucursal.comentariosSucursal}" />
+            </p:column>
+        </p:dataTable>
+    </h:form>
+
+
+</h:body>
+</html>

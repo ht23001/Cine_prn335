@@ -6,40 +6,41 @@ import jakarta.validation.constraints.Size;
 @Entity
 @Table(name = "pelicula")
 public class Pelicula {
+
     @Id
     @Column(name = "id_pelicula", nullable = false)
-    private Long id;
+    private Long idPelicula;
 
     @Size(max = 255)
     @Column(name = "nombre")
-    private String nombre;
+    private String nombrePelicula;
 
     @Lob
     @Column(name = "sinopsis")
-    private String sinopsis;
+    private String sinopsisPelicula;
 
-    public Long getId() {
-        return id;
+    public Long getIdPelicula() {
+        return idPelicula;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setIdPelicula(Long id) {
+        this.idPelicula = id;
     }
 
-    public String getNombre() {
-        return nombre;
+    public String getNombrePelicula() {
+        return nombrePelicula;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setNombrePelicula(String nombre) {
+        this.nombrePelicula = nombre;
     }
 
-    public String getSinopsis() {
-        return sinopsis;
+    public String getSinopsisPelicula() {
+        return sinopsisPelicula;
     }
 
-    public void setSinopsis(String sinopsis) {
-        this.sinopsis = sinopsis;
+    public void setSinopsisPelicula(String sinopsis) {
+        this.sinopsisPelicula = sinopsis;
     }
 
 }

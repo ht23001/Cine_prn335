@@ -1,0 +1,54 @@
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+    <title>Gestión de Facturas</title>
+</h:head>
+<h:body>
+    <h:form id="frmFactura">
+        <!-- Tabla para mostrar la lista de Facturas -->
+        <p:dataTable id="facturaTable"
+                     value="#{frmFactura.modelo}"
+                     var="factura"
+                     lazy="true"
+                     paginator="true"
+                     rows="10"
+                     rowKey="#{factura.idFactura}"
+                     selection="#{frmFactura.registro}"
+                     selectionMode="single">
+
+            <!-- Eventos AJAX -->
+            <p:ajax event="rowSelect" update="detallePanel" />
+
+            <!-- Columna ID de Factura -->
+            <p:column headerText="ID">
+                <h:outputText value="#{factura.idFactura}" />
+            </p:column>
+
+            <!-- Columna Cliente -->
+            <p:column headerText="Cliente">
+                <h:outputText value="#{factura.clienteFactura}" />
+            </p:column>
+
+            <!-- Columna DUI -->
+            <p:column headerText="DUI">
+                <h:outputText value="#{factura.duiFactura}" />
+            </p:column>
+
+            <!-- Columna Fecha -->
+            <p:column headerText="Fecha">
+                <h:outputText value="#{factura.fechaFactura}" />
+            </p:column>
+
+            <!-- Columna Comentarios -->
+            <p:column headerText="Comentarios">
+                <h:outputText value="#{factura.comentariosFactura}" />
+            </p:column>
+        </p:dataTable>
+    </h:form>
+
+
+</h:body>
+</html>

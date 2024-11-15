@@ -1,6 +1,7 @@
 package sv.edu.ues.occ.ingenieria.prn335_2024.cine.Entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
 @Entity
@@ -8,56 +9,57 @@ import jakarta.validation.constraints.Size;
 public class TipoReserva {
     @Id
     @Column(name = "id_tipo_reserva", nullable = false)
-    private Integer id;
+    private Integer idTipoReserva;
 
-    @Size(max = 155)
+    @NotBlank
+    @Size(max = 155 , min=3)
     @Column(name = "nombre", length = 155)
-    private String nombre;
+    private String nombreTipoReserva;
 
     @Column(name = "activo")
-    private Boolean activo;
+    private Boolean activoTipoReserva;
 
     @Lob
     @Column(name = "comentarios")
-    private String comentarios;
+    private String comentariosTipoReserva;
 
     // constructores para mockito
-    public TipoReserva(int id){
-        this.id=id;
+    public TipoReserva(int idTipoReserva){
+        this.idTipoReserva = idTipoReserva;
     }
 
     public TipoReserva(){}
 
-    public Integer getId() {
-        return id;
+    public Integer getIdTipoReserva() {
+        return idTipoReserva;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setIdTipoReserva(Integer id) {
+        this.idTipoReserva = id;
     }
 
-    public String getNombre() {
-        return nombre;
+    public String getNombreTipoReserva() {
+        return nombreTipoReserva;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setNombreTipoReserva(String nombre) {
+        this.nombreTipoReserva = nombre;
     }
 
-    public Boolean getActivo() {
-        return activo;
+    public Boolean getActivoTipoReserva() {
+        return activoTipoReserva;
     }
 
-    public void setActivo(Boolean activo) {
-        this.activo = activo;
+    public void setActivoTipoReserva(Boolean activo) {
+        this.activoTipoReserva = activo;
     }
 
-    public String getComentarios() {
-        return comentarios;
+    public String getComentariosTipoReserva() {
+        return comentariosTipoReserva;
     }
 
-    public void setComentarios(String comentarios) {
-        this.comentarios = comentarios;
+    public void setComentariosTipoReserva(String comentarios) {
+        this.comentariosTipoReserva = comentarios;
     }
 
 }

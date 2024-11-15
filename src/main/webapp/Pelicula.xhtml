@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+    <title>Lista de Películas</title>
+</h:head>
+
+<h:form id="frmPelicula">
+    <!-- Tabla para mostrar lista de Películas -->
+    <p:dataTable id="peliculaTable"
+                 value="#{frmPelicula.modelo}"
+                 var="pelicula"
+                 lazy="true"
+                 paginator="true"
+                 rows="10"
+                 selectionMode="single"
+                 selection="#{frmPelicula.registro}"
+                 rowKey="#{pelicula.idPelicula}">
+
+        <p:ajax event="rowSelect" update="detallePanel" />
+
+        <!-- Columna ID de Película -->
+        <p:column headerText="ID">
+            <h:outputText value="#{pelicula.idPelicula}" />
+        </p:column>
+
+        <!-- Columna Nombre de la Película -->
+        <p:column headerText="Nombre">
+            <h:outputText value="#{pelicula.nombrePelicula}" />
+        </p:column>
+
+        <!-- Columna Sinopsis -->
+        <p:column headerText="Sinopsis">
+            <h:outputText value="#{pelicula.sinopsisPelicula}" />
+        </p:column>
+
+    </p:dataTable>
+</h:form>
+
+</html>

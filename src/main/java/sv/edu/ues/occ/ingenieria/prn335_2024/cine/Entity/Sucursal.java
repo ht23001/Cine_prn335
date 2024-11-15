@@ -8,71 +8,71 @@ import jakarta.validation.constraints.Size;
 public class Sucursal {
     @Id
     @Column(name = "id_sucursal", nullable = false)
-    private Integer id;
+    private Integer idSucursal;
 
     @Size(max = 155)
     @Column(name = "nombre", length = 155)
-    private String nombre;
+    private String nombreSucursal;
 
     @Column(name = "longitud")
-    private Double longitud;
+    private Double longitudSucursal;
 
     @Column(name = "latitud")
-    private Double latitud;
+    private Double latitudSucursal;
 
     @Lob
     @Column(name = "comentarios")
-    private String comentarios;
+    private String comentariosSucursal;
 
     @Column(name = "activo")
-    private Boolean activo;
+    private Boolean activoSucursal;
 
-    public Integer getId() {
-        return id;
+    public Integer getIdSucursal() {
+        return idSucursal;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setIdSucursal(Integer id) {
+        this.idSucursal = id;
     }
 
-    public String getNombre() {
-        return nombre;
+    public String getNombreSucursal() {
+        return nombreSucursal;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setNombreSucursal(String nombre) {
+        this.nombreSucursal = nombre;
     }
 
-    public Double getLongitud() {
-        return longitud;
+    public Double getLongitudSucursal() {
+        return longitudSucursal;
     }
 
-    public void setLongitud(Double longitud) {
-        this.longitud = longitud;
+    public void setLongitudSucursal(Double longitud) {
+        this.longitudSucursal = longitud;
     }
 
-    public Double getLatitud() {
-        return latitud;
+    public Double getLatitudSucursal() {
+        return latitudSucursal;
     }
 
-    public void setLatitud(Double latitud) {
-        this.latitud = latitud;
+    public void setLatitudSucursal(Double latitud) {
+        this.latitudSucursal = latitud;
     }
 
-    public String getComentarios() {
-        return comentarios;
+    public String getComentariosSucursal() {
+        return comentariosSucursal;
     }
 
-    public void setComentarios(String comentarios) {
-        this.comentarios = comentarios;
+    public void setComentariosSucursal(String comentarios) {
+        this.comentariosSucursal = comentarios;
     }
 
-    public Boolean getActivo() {
-        return activo;
+    public Boolean getActivoSucursal() {
+        return activoSucursal;
     }
 
-    public void setActivo(Boolean activo) {
-        this.activo = activo;
+    public void setActivoSucursal(Boolean activo) {
+        this.activoSucursal = activo;
     }
 
 }

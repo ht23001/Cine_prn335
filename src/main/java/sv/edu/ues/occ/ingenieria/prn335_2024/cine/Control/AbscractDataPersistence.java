@@ -68,7 +68,12 @@ public abstract class AbscractDataPersistence <T> {
     }
 
     public long count() {
-        return 0;
+        EntityManager em = getEntityManager();
+        CriteriaBuilder cb = em.getCriteriaBuilder();
+        CriteriaQuery<Long> cq = cb.createQuery(Long.class);
+        Root<T> root = cq.from(tipoDatos);
+        cq.select(cb.count(root));
+        return em.createQuery(cq).getSingleResult();
     }
 
 }

@@ -11,7 +11,7 @@ import java.io.Serializable;
 
 @LocalBean
 @Stateless
-public class FacturaDetalleSalaBean extends AbscractDataPersistence<FacturaDetalleSala> implements Serializable {
+public class  FacturaDetalleSalaBean extends AbscractDataPersistence<FacturaDetalleSala> implements Serializable {
 
     @PersistenceContext(unitName = "CinePU")
     EntityManager em;

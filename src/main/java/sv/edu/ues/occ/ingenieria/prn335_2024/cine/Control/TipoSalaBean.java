@@ -34,14 +34,14 @@ public class TipoSalaBean extends AbscractDataPersistence<TipoSala> implements S
     }
 
     public void create(TipoSala registro) {
-            em.persist(registro);
+        em.persist(registro);
     }
     public TipoSala update(TipoSala registro){
 
-       return em.merge(registro);
+        return em.merge(registro);
     }
 
     public void delete(TipoSala registro) {
-       em.remove(registro);
+        em.remove(registro);
     }
 }

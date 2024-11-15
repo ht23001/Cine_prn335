@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+    <title>Gestión de Salas</title>
+</h:head>
+
+<h:body>
+    <h:form id="formSala">
+
+        <!-- Tabla de Salas -->
+        <p:dataTable id="tablaSalas"
+                     value="#{frmSala.modelo}"
+                     var="sala"
+                     paginator="true"
+                     rows="10"
+                     lazy="true"
+                     selectionMode="single"
+                     selection="#{frmSala.registro}"
+                     rowKey="#{sala.idSala}">
+
+            <p:column headerText="ID">
+                <h:outputText value="#{sala.idSala}" />
+            </p:column>
+
+            <p:column headerText="Nombre">
+                <h:outputText value="#{sala.nombreSala}" />
+            </p:column>
+
+            <p:column headerText="Sucursal">
+                <h:outputText value="#{sala.idSucursal.nombre}" />
+            </p:column>
+
+            <p:column headerText="Activo">
+                <h:outputText value="#{sala.activoSala ? 'Sí' : 'No'}" />
+            </p:column>
+
+            <p:column headerText="Observaciones">
+                <h:outputText value="#{sala.observacionesSala}" />
+            </p:column>
+
+        </p:dataTable>
+
+        <!-- Botón para nueva Sala -->
+        <p:commandButton value="Nueva Sala"
+                         icon="pi pi-plus"
+                         actionListener="#{frmSala.btnNuevoHandler}"
+                         update="dialogSala"
+                         oncomplete="PF('dlgSala').show()" />
+
+        <!-- Diálogo para editar o crear una Sala -->
+        <p:dialog id="dialogSala"
+                  header="Gestión de Sala"
+                  widgetVar="dlgSala"
+                  resizable="false"
+                  modal="true">
+
+            <h:panelGrid columns="2" cellpadding="5">
+                <!-- Campo ID -->
+                <h:outputLabel value="ID:" for="idSala" />
+                <p:inputText id="idSala"
+                             value="#{frmSala.registro.idSala}"
+                             required="true"
+                             disabled="#{frmSala.registro.idSala != null}" />
+
+                <!-- Campo Nombre -->
+                <h:outputLabel value="Nombre:" for="nombreSala" />
+                <p:inputText id="nombreSala"
+                             value="#{frmSala.registro.nombreSala}"
+                             required="true" />
+
+                <!-- Campo Sucursal -->
+                <h:outputLabel value="Sucursal:" for="idSucursal" />
+                <p:selectOneMenu id="idSucursal"
+                                 value="#{frmSala.registro.idSucursal}">
+                    <f:selectItems value="#{frmSala.dataBean.getSucursales()}"
+                                   var="sucursal"
+                                   itemValue="#{sucursal}"
+                                   itemLabel="#{sucursal.nombre}" />
+                </p:selectOneMenu>
+
+                <!-- Campo Activo -->
+                <h:outputLabel value="Activo:" for="activoSala" />
+                <p:selectBooleanCheckbox id="activoSala"
+                                         value="#{frmSala.registro.activoSala}" />
+
+                <!-- Campo Observaciones -->
+                <h:outputLabel value="Observaciones:" for="observacionesSala" />
+                <p:inputTextarea id="observacionesSala"
+                                 value="#{frmSala.registro.observacionesSala}"
+                                 rows="3" />
+
+            </h:panelGrid>
+
+            <f:facet name="footer">
+                <p:commandButton value="Guardar"
+                                 icon="pi pi-save"
+                                 actionListener="#{frmSala.dataBean.save(frmSala.registro)}"
+                                 oncomplete="PF('dlgSala').hide()"
+                                 update="formSala" />
+                <p:commandButton value="Cancelar"
+                                 icon="pi pi-times"
+                                 oncomplete="PF('dlgSala').hide()" />
+            </f:facet>
+
+        </p:dialog>
+
+    </h:form>
+</h:body>
+</html>

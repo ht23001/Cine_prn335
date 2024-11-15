@@ -10,61 +10,61 @@ import java.time.OffsetDateTime;
 public class Factura {
     @Id
     @Column(name = "id_factura", nullable = false)
-    private Long id;
+    private Long idFactura;
 
     @Size(max = 255)
     @Column(name = "cliente")
-    private String cliente;
+    private String clienteFactura;
 
     @Size(max = 155)
     @Column(name = "dui", length = 155)
-    private String dui;
+    private String duiFactura;
 
     @Column(name = "fecha")
-    private OffsetDateTime fecha;
+    private OffsetDateTime fechaFactura;
 
     @Lob
     @Column(name = "comentarios")
-    private String comentarios;
+    private String comentariosFactura;
 
-    public Long getId() {
-        return id;
+    public Long getIdFactura() {
+        return idFactura;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setIdFactura(Long id) {
+        this.idFactura = id;
     }
 
-    public String getCliente() {
-        return cliente;
+    public String getClienteFactura() {
+        return clienteFactura;
     }
 
-    public void setCliente(String cliente) {
-        this.cliente = cliente;
+    public void setClienteFactura(String cliente) {
+        this.clienteFactura = cliente;
     }
 
-    public String getDui() {
-        return dui;
+    public String getDuiFactura() {
+        return duiFactura;
     }
 
-    public void setDui(String dui) {
-        this.dui = dui;
+    public void setDuiFactura(String dui) {
+        this.duiFactura = dui;
     }
 
-    public OffsetDateTime getFecha() {
-        return fecha;
+    public OffsetDateTime getFechaFactura() {
+        return fechaFactura;
     }
 
-    public void setFecha(OffsetDateTime fecha) {
-        this.fecha = fecha;
+    public void setFechaFactura(OffsetDateTime fecha) {
+        this.fechaFactura = fecha;
     }
 
-    public String getComentarios() {
-        return comentarios;
+    public String getComentariosFactura() {
+        return comentariosFactura;
     }
 
-    public void setComentarios(String comentarios) {
-        this.comentarios = comentarios;
+    public void setComentariosFactura(String comentarios) {
+        this.comentariosFactura = comentarios;
     }
 
 }

@@ -1,36 +1,61 @@
-<?xml version="1.0" encoding="UTF-8"?>
-
 <!DOCTYPE html>
-
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:p="primefaces"
-      >
-
-
+      xmlns:p="http://primefaces.org/ui">
 <h:head>
-    <title>Prueba primesfaces</title>
-
+    <title>Gestión de Tipo Reserva</title>
 </h:head>
-
 <h:body>
-    <h:form id="frmTable">
-        <p:dataTable 
-        var=""
-        paginator="true" 
-        rows="10"
-         value=""> 
+    <h:form id="formTipoReserva">
+        <h1>Gestión de Tipo Reserva</h1>
 
+        <!-- Tabla de datos -->
+        <p:dataTable value="#{frmTipoReserva.modelo}" var="tipoReserva"
+                     lazy="true" id="tablaTipoReserva"
+                     paginator="true" rows="10"
+                     selectionMode="single"
+                     selection="#{frmTipoReserva.registro}"
+                     rowKey="#{tipoReserva.idTipoReserva}">
 
+            <p:column headerText="ID" sortBy="#{tipoReserva.idTipoReserva}">
+                <h:outputText value="#{tipoReserva.idTipoReserva}" />
+            </p:column>
+            <p:column headerText="Nombre" sortBy="#{tipoReserva.nombreTipoReserva}">
+                <h:outputText value="#{tipoReserva.nombreTipoReserva}" />
+            </p:column>
+            <p:column headerText="Activo">
+                <h:outputText value="#{tipoReserva.activoTipoReserva ? 'Sí' : 'No'}" />
+            </p:column>
+            <p:column headerText="Comentarios">
+                <h:outputText value="#{tipoReserva.comentariosTipoReserva}" />
+            </p:column>
         </p:dataTable>
 
+        <!-- Botones de acción -->
+        <p:toolbar>
+            <p:toolbarGroup>
+                <p:commandButton value="Nuevo" actionListener="#{frmTipoReserva.btnNuevoHandler}" update=":formTipoReserva:dlgCrear" oncomplete="PF('dlgCrear').show();" />
+                <p:commandButton value="Guardar" actionListener="#{frmTipoReserva.btnCrearHandler}" update=":formTipoReserva:tablaTipoReserva" />
+            </p:toolbarGroup>
+        </p:toolbar>
 
+        <!-- Diálogo para crear o editar -->
+        <p:dialog header="Crear Tipo Reserva" widgetVar="dlgCrear" modal="true" resizable="false">
+            <h:panelGrid columns="2">
+                <h:outputLabel for="nombre" value="Nombre:" />
+                <p:inputText id="nombre" value="#{frmTipoReserva.registro.nombreTipoReserva}" required="true" />
+
+                <h:outputLabel for="comentarios" value="Comentarios:" />
+                <p:inputTextarea id="comentarios" value="#{frmTipoReserva.registro.comentariosTipoReserva}" rows="4" cols="20" />
+
+                <h:outputLabel for="activo" value="Activo:" />
+                <p:selectBooleanCheckbox id="activo" value="#{frmTipoReserva.registro.activoTipoReserva}" />
+            </h:panelGrid>
+
+            <p:commandButton value="Guardar" actionListener="#{frmTipoReserva.btnCrearHandler}"
+                             update=":formTipoReserva:tablaTipoReserva"
+                             oncomplete="PF('dlgCrear').hide();" />
+        </p:dialog>
     </h:form>
-
- 
- 
-
 </h:body>
-
 </html>
-

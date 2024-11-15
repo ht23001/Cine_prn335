@@ -8,7 +8,7 @@ import jakarta.validation.constraints.Size;
 public class Asiento {
     @Id
     @Column(name = "id_asiento", nullable = false)
-    private Long id;
+    private Long idAsiento;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_sala")
@@ -16,17 +16,17 @@ public class Asiento {
 
     @Size(max = 155)
     @Column(name = "nombre", length = 155)
-    private String nombre;
+    private String nombreAsiento;
 
     @Column(name = "activo")
-    private Boolean activo;
+    private Boolean activoAsiento;
 
-    public Long getId() {
-        return id;
+    public Long getIdAsiento() {
+        return idAsiento;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setIdAsiento(Long id) {
+        this.idAsiento = id;
     }
 
     public sv.edu.ues.occ.ingenieria.prn335_2024.cine.Entity.Sala getIdSala() {
@@ -37,20 +37,20 @@ public class Asiento {
         this.idSala = idSala;
     }
 
-    public String getNombre() {
-        return nombre;
+    public String getNombreAsiento() {
+        return nombreAsiento;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setNombreAsiento(String nombre) {
+        this.nombreAsiento = nombre;
     }
 
-    public Boolean getActivo() {
-        return activo;
+    public Boolean getActivoAsiento() {
+        return activoAsiento;
     }
 
-    public void setActivo(Boolean activo) {
-        this.activo = activo;
+    public void setActivoAsiento(Boolean activo) {
+        this.activoAsiento = activo;
     }
 
 }

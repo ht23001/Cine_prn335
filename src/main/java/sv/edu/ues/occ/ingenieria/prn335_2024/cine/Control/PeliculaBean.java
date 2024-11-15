@@ -13,7 +13,6 @@ import java.io.Serializable;
 
 public class PeliculaBean extends AbscractDataPersistence<Pelicula> implements Serializable {
 
-
     @PersistenceContext(unitName = "CinePU")
     EntityManager em;
 
@@ -22,4 +21,16 @@ public class PeliculaBean extends AbscractDataPersistence<Pelicula> implements S
     }
     @Override
     public EntityManager getEntityManager(){return em;}
+
+    public void create(Pelicula registro) {
+        em.persist(registro);
+    }
+    public Pelicula update(Pelicula registro){
+
+        return em.merge(registro);
+    }
+
+    public void delete(Pelicula registro) {
+        em.remove(registro);
+    }
 }

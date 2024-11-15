@@ -4,7 +4,6 @@ import jakarta.ejb.LocalBean;
 import jakarta.ejb.Stateless;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
-import sv.edu.ues.occ.ingenieria.prn335_2024.cine.Entity.ReservaDetalle;
 import sv.edu.ues.occ.ingenieria.prn335_2024.cine.Entity.Sucursal;
 
 import java.io.Serializable;
@@ -21,4 +20,16 @@ public class SucursalBean  extends AbscractDataPersistence<Sucursal> implements 
     @Override
     public EntityManager getEntityManager(){return em;}
 
+
+    public void create(Sucursal registro) {
+        em.persist(registro);
+    }
+    public Sucursal update(Sucursal registro){
+
+        return em.merge(registro);
+    }
+
+    public void delete(Sucursal registro) {
+        em.remove(registro);
+    }
 }
