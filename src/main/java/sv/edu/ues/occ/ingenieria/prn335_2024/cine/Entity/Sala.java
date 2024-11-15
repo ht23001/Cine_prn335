@@ -8,7 +8,12 @@ import jakarta.validation.constraints.Size;
 @NamedQueries({
         @NamedQuery(
                 name="Sala.findByIdTipoSala",
-                query = "SELECT s FROM SalaCaracteristica sc JOIN sc.idSala s WHERE  sc.idTipoSala.idTipoSala = :idTipoSala GROUP BY s.idSala ORDER BY s.nombre ASC ")
+                query = "SELECT s FROM SalaCaracteristica sc JOIN sc.idSala s WHERE  sc.idTipoSala.idTipoSala = :idTipoSala GROUP BY s.idSala ORDER BY s.nombre ASC "),
+
+                @NamedQuery(
+                        name="Sala.IdMaximo",
+                        query = "SELECT max (s.idSala) FROM Sala s"),
+
 })
 
 public class Sala {
@@ -46,8 +51,8 @@ public class Sala {
         this.idSala = id;
     }
 
-    public sv.edu.ues.occ.ingenieria.prn335_2024.cine.Entity.Sucursal getIdSucursal() {
-        return idSucursal;
+    public int getIdSucursal() {
+        return idSucursal.getId();
     }
 
     public void setIdSucursal(sv.edu.ues.occ.ingenieria.prn335_2024.cine.Entity.Sucursal idSucursal) {
@@ -77,5 +82,7 @@ public class Sala {
     public void setObservaciones(String observaciones) {
         this.observaciones = observaciones;
     }
+
+
 
 }
