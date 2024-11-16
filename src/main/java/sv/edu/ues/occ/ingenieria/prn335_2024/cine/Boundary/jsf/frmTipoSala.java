@@ -5,14 +5,12 @@ import jakarta.enterprise.context.SessionScoped;
 import jakarta.faces.application.FacesMessage;
 import jakarta.faces.context.FacesContext;
 import jakarta.faces.event.ActionEvent;
-import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
 import org.primefaces.model.FilterMeta;
 import org.primefaces.model.LazyDataModel;
 import org.primefaces.model.SortMeta;
 import sv.edu.ues.occ.ingenieria.prn335_2024.cine.Control.TipoSalaBean;
-import sv.edu.ues.occ.ingenieria.prn335_2024.cine.Entity.TipoReserva;
 import sv.edu.ues.occ.ingenieria.prn335_2024.cine.Entity.TipoSala;
 
 import java.io.Serializable;

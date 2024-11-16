@@ -10,80 +10,69 @@
 
 
     <f:define name="titulo">
-        TIPO PELICULA
+        PELICULA
     </f:define>
 
     <f:define name="cuerpo">
         <h:panelGrid>
-            <h1>TIPO PELICULA</h1>
+            <h1>PELICULA</h1>
             <h:panelGroup id="pnlTabla">
+
                 <h:form id="frmTabla">
                     <h:panelGrid>
                         <p:dataTable
-                                value="#{frmTipoPelicula.modelo}"
+                                value="#{frmPelicula.modelo}"
                                 var="r"
                                 rows="10"
                                 lazy="true"
                                 selectionMode="single"
-                                selection="#{frmTipoPelicula.registro}"
+                                selection="#{frmPelicula.registro}"
                                 paginator="true"
                         >
                             <p:ajax event="rowSelect"  update=":pnlDetalle" process="@this" oncomplete="PF('customerDialog').show()"
                             />
                             <p:column headerText="ID">
-                                <h:outputText value="#{r.idTipoPelicula}"/>
+                                <h:outputText value="#{r.idPelicula}"/>
                             </p:column>
                             <p:column headerText="Nombre">
                                 <h:outputText value="#{r.nombre}"/>
                             </p:column>
-                            <p:column headerText="Estado">
-                                <h:outputText value="#{r.activo?'ACTIVO':'INACTIVO'}"/>
+                            <p:column headerText="Sinopsis">
+                                <h:outputText value="#{r.sinopsis}"/>
                             </p:column>
-                            <p:column headerText="Expresión Regular">
-                                <h:outputText value="#{r.expresionRegular}"/>
-                            </p:column>
-                            <p:column headerText="Comentarios">
-                                <h:outputText value="#{r.comentarios}"/>
-                            </p:column>
-
                         </p:dataTable>
                     </h:panelGrid>
-
                     <p:growl life="5000"/>
-                    <h:panelGrid columns="#{frmTipoPelicula.estado!='NINGUNO'?'2':'1'}">
+                    <h:panelGrid columns="#{frmPelicula.estado!='NINGUNO'?'2':'1'}">
                         <p:commandButton ajax="true"
-                                         actionListener="#{frmTipoPelicula.btnNuevoHandler}"
+                                         actionListener="#{frmPelicula.btnNuevoHandler}"
                                          value="Nuevo"
                                          process="@this" update=":pnlDetalle :pnlTabla"
                                          oncomplete="PF('customerDialog').show()"/>
                     </h:panelGrid>
                 </h:form>
                 <h:panelGroup id="pnlDetalle" >
-                    <p:dialog header="Tipo Pelicula" widgetVar="customerDialog" modal="true"
+                    <p:dialog header="" widgetVar="customerDialog" modal="true"
                               showEffect="fade" hideEffect="fade" resizable="false" id="dlgDetalle">
                         <h:form id="frmDetalle" >
                             <h:panelGrid>
                                 <h:panelGrid columns="2">
                                     <p:outputLabel value="ID" for="txtId"/>
-                                    <p:inputText id="txtId" value="#{frmTipoPelicula.registro.idTipoPelicula}" readonly="true" disabled="true"/>
+                                    <p:inputText id="txtId" value="#{frmPelicula.registro.idPelicula}" readonly="true" disabled="true"/>
                                     <p:outputLabel value="Nombre" for="txtNombre"/>
-                                    <p:inputText size="70" id="txtNombre" value="#{frmTipoPelicula.registro.nombre}"/>
-                                    <p:outputLabel for="chkActivo" value="Activo"/>
-                                    <p:selectBooleanCheckbox id="chkActivo" value="#{frmTipoPelicula.registro.activo}"/>
-                                    <p:outputLabel for="txtExpresionRegular" value="Expresión Regular"/>
-                                    <p:inputTextarea id="txtExpresionRegular" value="#{frmTipoPelicula.registro.expresionRegular}" cols="70" rows="3"/>
-                                    <p:outputLabel for="txtComentarios" value="Comentarios"/>
-                                    <p:inputTextarea id="txtComentarios" value="#{frmTipoPelicula.registro.comentarios}" cols="70" rows="3"/>
+                                    <p:inputText size="70" id="txtNombre" value="#{frmPelicula.registro.nombre}"/>
+                                    <p:outputLabel for="txtSinopsis" value="Sinopsis"/>
+                                    <p:inputTextarea id="txtSinopsis" value="#{frmPelicula.registro.sinopsis}" cols="70" rows="3"/>
                                 </h:panelGrid>
                                 <p:messages showSummary="true" showDetail="true"/>
                                 <h:panelGrid columns="4">
                                     <p:commandButton value="Guardar" ajax="true"
                                                      process="@form"
-                                                     rendered="#{frmTipoPelicula.estado=='CREAR'}"
+                                                     rendered="#{frmPelicula.estado=='CREAR'}"
                                                      update=":pnlDetalle :pnlTabla"
-                                                     actionListener="#{frmTipoPelicula.btnGuardarHandler}"/>
+                                                     actionListener="#{frmPelicula.btnGuardarHandler}"/>
                                     <p:commandButton ajax="true"
-                                                     actionListener="#{frmTipoPelicula.btnCancelarHandler}"
+                                                     actionListener="#{frmPelicula.btnCancelarHandler}"
                                                      value="Cancelar"
                                                      process="@this" update=":pnlDetalle :pnlTabla"
                                                      rendered="true"
@@ -91,17 +80,18 @@
                                     <p:commandButton value="Modificar" ajax="true"
                                                      process="@form"
                                                      update=":pnlDetalle :pnlTabla"
-                                                     rendered="#{frmTipoPelicula.estado!='CREAR'}"
-                                                     actionListener="#{frmTipoPelicula.btnModificarHandler}"/>
+                                                     rendered="#{frmPelicula.estado!='CREAR'}"
+                                                     actionListener="#{frmPelicula.btnModificarHandler}"/>
                                     <p:commandButton value="Eliminar" ajax="true"
                                                      process="@form"
                                                      update=":pnlDetalle :pnlTabla"
-                                                     rendered="#{frmTipoPelicula.estado!='CREAR'}"
-                                                     actionListener="#{frmTipoPelicula.btnEliminarHandler}"/>
+                                                     rendered="#{frmPelicula.estado!='CREAR'}"
+                                                     actionListener="#{frmPelicula.btnEliminarHandler}"/>
                                 </h:panelGrid>
                             </h:panelGrid>
                         </h:form>
                     </p:dialog>
+
                 </h:panelGroup>
             </h:panelGroup>
         </h:panelGrid>

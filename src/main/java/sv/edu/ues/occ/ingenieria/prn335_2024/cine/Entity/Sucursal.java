@@ -5,6 +5,11 @@ import jakarta.validation.constraints.Size;
 
 @Entity
 @Table(name = "sucursal")
+@NamedQueries({
+        @NamedQuery(
+                name="Sucursal.IdMaximo",
+                query = "SELECT max(tp.idSucursal) FROM Sucursal tp")
+})
 public class Sucursal {
     @Id
     @Column(name = "id_sucursal", nullable = false)

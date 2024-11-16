@@ -12,15 +12,12 @@ import org.primefaces.model.FilterMeta;
 import org.primefaces.model.LazyDataModel;
 import org.primefaces.model.SortMeta;
 import sv.edu.ues.occ.ingenieria.prn335_2024.cine.Control.TipoAsientoBean;
-import sv.edu.ues.occ.ingenieria.prn335_2024.cine.Control.TipoPagoBean;
 import sv.edu.ues.occ.ingenieria.prn335_2024.cine.Entity.TipoAsiento;
 import sv.edu.ues.occ.ingenieria.prn335_2024.cine.Entity.TipoReserva;
-import sv.edu.ues.occ.ingenieria.prn335_2024.cine.Entity.TipoSala;
 
 import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Stream;
 
 @Named
 @SessionScoped

@@ -1,10 +1,7 @@
 package sv.edu.ues.occ.ingenieria.prn335_2024.cine.Entity;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
-
-import java.util.List;
 
 @Entity
 @Table(name = "tipo_reserva")
@@ -14,42 +11,18 @@ import java.util.List;
                 query = "SELECT max (tr.idTipoReserva) FROM TipoReserva tr")
 })
 public class TipoReserva {
-    @Id
-    @Column(name = "id_tipo_reserva", nullable = false)
     private Integer idTipoReserva;
 
-
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "idTipoReserva")
-    public List<Reserva> ReservaList;
-
-    public List<Reserva> getReservaList() {
-        return ReservaList;
-    }
-
-    public void setReservaList(List<Reserva> reservaList) {
-        ReservaList = reservaList;
-    }
-
-
-    @NotBlank
-    @Size(max = 155, min = 3)
-    @Column(name = "nombre", length = 155)
     private String nombre;
 
-    @Column(name = "activo")
     private Boolean activo;
 
-    @Lob
-    @Column(name = "comentarios")
     private String comentarios;
 
-    // constructores para mockito
-    public TipoReserva(int idTipoReserva){
-        this.idTipoReserva = idTipoReserva;
-    }
-
-    public TipoReserva(){}
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "tipo_reserva_id_gen")
+    @SequenceGenerator(name = "tipo_reserva_id_gen", sequenceName = "tipo_reserva_id_tipo_reserva_seq", allocationSize = 1)
+    @Column(name = "id_tipo_reserva", nullable = false)
     public Integer getIdTipoReserva() {
         return idTipoReserva;
     }
@@ -58,6 +31,8 @@ public class TipoReserva {
         this.idTipoReserva = id;
     }
 
+    @Size(max = 155)
+    @Column(name = "nombre", length = 155)
     public String getNombre() {
         return nombre;
     }
@@ -66,6 +41,7 @@ public class TipoReserva {
         this.nombre = nombre;
     }
 
+    @Column(name = "activo")
     public Boolean getActivo() {
         return activo;
     }
@@ -74,6 +50,8 @@ public class TipoReserva {
         this.activo = activo;
     }
 
+    @Lob
+    @Column(name = "comentarios")
     public String getComentarios() {
         return comentarios;
     }
