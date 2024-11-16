@@ -66,12 +66,17 @@ public class frmMenu implements Serializable {
 
         tipos.getElements().add(item4);
         DefaultMenuItem item5=DefaultMenuItem.builder()
-                .value("Asiento")
+                .value("Reserva")
                 .ajax(true)
                 .command("#{frmMenu.navegar('TipoReserva.jsf')}")
                 .build();
 
         tipos.getElements().add(item5);
+
+
+
+
+
 
         DefaultSubMenu cine  = DefaultSubMenu.builder()
                 .label("Cine")
@@ -83,30 +88,31 @@ public class frmMenu implements Serializable {
                 .command("#{frmMenu.navegar('Pelicula.jsf')}")
                 .build();
 
-        tipos.getElements().add(item6);
+        cine.getElements().add(item6);
         DefaultMenuItem item7=DefaultMenuItem.builder()
                 .value("Sucursal")
                 .ajax(true)
                 .command("#{frmMenu.navegar('Sucursal.jsf')}")
                 .build();
 
-        tipos.getElements().add(item7);
+        cine.getElements().add(item7);
         DefaultMenuItem item8=DefaultMenuItem.builder()
                 .value("Sala")
                 .ajax(true)
                 .command("#{frmMenu.navegar('Sala.jsf')}")
                 .build();
 
-        tipos.getElements().add(item8);
+        cine.getElements().add(item8);
         DefaultMenuItem item9=DefaultMenuItem.builder()
                 .value("Reserva")
                 .ajax(true)
                 .command("#{frmMenu.navegar('Reserva.jsf')}")
                 .build();
 
-        tipos.getElements().add(item9);
+        cine.getElements().add(item9);
 
         model.getElements().add(tipos );
+        model.getElements().add(cine );
     }
 
     public void navegar(String formulario ) throws IOException {
