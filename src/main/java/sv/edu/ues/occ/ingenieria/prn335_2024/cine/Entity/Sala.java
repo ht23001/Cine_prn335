@@ -23,7 +23,7 @@ public class Sala {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_sucursal")
-    private sv.edu.ues.occ.ingenieria.prn335_2024.cine.Entity.Sucursal idSucursal;
+    private sv.edu.ues.occ.ingenieria.prn335_2024.cine.Entity.Sucursal id;
 
 
     @Size(max = 155)
@@ -51,12 +51,13 @@ public class Sala {
         this.idSala = id;
     }
 
+
     public int getIdSucursal() {
         return idSucursal.getId();
     }
 
-    public void setIdSucursal(sv.edu.ues.occ.ingenieria.prn335_2024.cine.Entity.Sucursal idSucursal) {
-        this.idSucursal = idSucursal;
+    public void setId(sv.edu.ues.occ.ingenieria.prn335_2024.cine.Entity.Sucursal idSucursal) {
+        this.id = idSucursal;
     }
 
     public String getNombre() {

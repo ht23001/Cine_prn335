@@ -7,10 +7,15 @@ import java.util.List;
 
 @Entity
 @Table(name = "sucursal")
+@NamedQueries({
+        @NamedQuery(
+                name="Sucursal.IdMaximo",
+                query = "SELECT max(tp.idSucursal) FROM Sucursal tp")
+})
 public class Sucursal {
     @Id
     @Column(name = "id_sucursal", nullable = false)
-    private Integer id;
+    private Integer idSucursal;
 
     @OneToMany (fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "idSucursal")
     public List<Sala> SalaList;
@@ -40,12 +45,12 @@ public class Sucursal {
     @Column(name = "activo")
     private Boolean activo;
 
-    public Integer getId() {
-        return id;
+    public Integer getIdSucursal() {
+        return idSucursal;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setIdSucursal(Integer id) {
+        this.idSucursal = id;
     }
 
     public String getNombre() {

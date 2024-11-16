@@ -49,6 +49,7 @@ public class SalaBean extends AbscractDataPersistence<Sala> implements Serializa
         }
         return Collections.emptyList();
     }
+
     public long count() {
         return em.createQuery("SELECT COUNT(t) FROM TipoSala t", Long.class).getSingleResult();
     }
@@ -72,6 +73,7 @@ public class SalaBean extends AbscractDataPersistence<Sala> implements Serializa
     public List<Sala> findRange(int desde, int max) {
         return em.createQuery("SELECT t FROM Sala t", Sala.class) .setFirstResult(desde) .setMaxResults(max) .getResultList();
     }
+
 
 
 }
