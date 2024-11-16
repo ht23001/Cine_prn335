@@ -3,12 +3,25 @@ package sv.edu.ues.occ.ingenieria.prn335_2024.cine.Entity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
 
+import java.util.List;
+
 @Entity
 @Table(name = "sucursal")
 public class Sucursal {
     @Id
     @Column(name = "id_sucursal", nullable = false)
     private Integer id;
+
+    @OneToMany (fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "idSucursal")
+    public List<Sala> SalaList;
+
+    public List<Sala> getSalaList() {
+        return SalaList;
+    }
+
+    public void setSalaList(List<Sala> salaList) {
+        SalaList = salaList;
+    }
 
     @Size(max = 155)
     @Column(name = "nombre", length = 155)
