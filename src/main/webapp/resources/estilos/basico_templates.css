@@ -1,8 +1,4 @@
 body{
-    background-image: url("#{resource['images/WhatsApp Image 2024-11-15 at 8.28.24 PM.jpeg']}");
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
     background-color: #857d71;
     color: #FFFFFF;
     background-repeat: no-repeat;

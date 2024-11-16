@@ -127,7 +127,7 @@ public class frmPelicula implements Serializable {
 
     public void btnNuevoHandler(ActionEvent actionEvent){
         this.registro = new Pelicula();
-        this.registro.setIdPelicula((long) (pBean.obtenerMaxIdPelicula(registro)+1));
+
         this.estado=ESTADO_CRUD.CREAR;
 
     }

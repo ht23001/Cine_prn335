@@ -12,6 +12,8 @@ import jakarta.validation.constraints.Size;
 })
 public class Pelicula {
     @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "pelicula_id_gen")
+    @SequenceGenerator(name = "pelicula_id_gen", sequenceName = "pelicula_id_pelicula_seq", allocationSize = 1)
     @Column(name = "id_pelicula", nullable = false)
     private Long idPelicula;
 
