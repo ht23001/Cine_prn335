@@ -14,38 +14,39 @@
       xmlns:f="jakarta.faces.facelets">
 
 <h:head>
+
     <title>PAGINA PRINCIPAL</title>
+
     <h:outputStylesheet library="estilos" name="basico_templates.css"/>
 </h:head>
 
 <h:body>
-    <h:form>
-        <div class="ui-g">
-            <p:growl/>
-            <div class="ui-g-12 ui-md-2">
-                <h:form id="frmMenuPrincipal">
-                    <p:menu model="#{frmMenu.model}" appendTo="body"
-                            toggleable="true"/>
-                </h:form>
+
+    <div class="ui-g">
+        <p:growl/>
+        <div class="ui-g-12 ui-md-2">
+            <h:form id="frmMenuPrincipal">
+                <p:menu model="#{frmMenu.model}" appendTo="body" toggleable="true"/>
+            </h:form>
+        </div>
+        <div class="ui-g-12 ui-md-10 ui-g-nopad">
+            <div class="ui-g-12">
+                <f:insert name="titulo">
+                    Titulo de la pagina
+                </f:insert>
             </div>
-            <div class="ui-g-12 ui-md-10 ui-g-nopad">
-                <div class="ui-g-12">
-                    <f:insert name="titulo">
-                        Titulo de la pagina
+            <div class="ui-g-12 ui-g-nopad">
+                <div class="ui-g">
+                    <f:insert name="cuerpo">
+                        Cuerpo de la pagina
                     </f:insert>
                 </div>
-                <div class="ui-g-12 ui-g-nopad">
-                    <div class="ui-g">
-                        <f:insert name="cuerpo">
-                            Cuerpo de la pagina
-                        </f:insert>
-                    </div>
-                </div>
             </div>
-
         </div>
-    </h:form>
-
+        <div class="ui-g-12">
+            Todos los derechos reservados por la empresa...@2024
+        </div>
+    </div>
     <f:insert name="extras"></f:insert>
 </h:body>
 

@@ -1,6 +1,8 @@
 package sv.edu.ues.occ.ingenieria.prn335_2024.cine.Boundary.jsf;
 
+
 import jakarta.annotation.PostConstruct;
+import jakarta.enterprise.context.RequestScoped;
 import jakarta.faces.context.FacesContext;
 import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Inject;
