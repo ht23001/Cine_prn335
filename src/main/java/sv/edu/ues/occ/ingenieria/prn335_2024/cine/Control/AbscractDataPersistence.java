@@ -1,5 +1,6 @@
 package sv.edu.ues.occ.ingenieria.prn335_2024.cine.Control;
 
+import jakarta.persistence.Entity;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.TypedQuery;
 import jakarta.persistence.criteria.CriteriaBuilder;
@@ -18,6 +19,8 @@ public abstract class AbscractDataPersistence <T> {
         this.tipoDatos = tipodatos;
     }
 
+    // METODO GENERAL PARA CREAR UN NUEVO ELEMENTO ej tipoSala
+
     public void Create(T entity){
        EntityManager em=null;
        if(entity==null){
@@ -34,6 +37,40 @@ public abstract class AbscractDataPersistence <T> {
        }
     }
 
+    // METODO GENERAL PARA ACTUALIZAR UN ELEMENTO ej tipoSala
+
+    public T Update(T entity){
+          if(entity==null){
+              throw new IllegalArgumentException( "La entidad a actualizar no puede ser nula");
+
+          }
+        EntityManager em=getEntityManager();
+          if(em==null){
+              throw new IllegalStateException("Error al acceder al repositorio");
+        }
+          return em.merge(entity);
+    }
+
+
+    // METODO GENERAL PARA ELIMINAR UN ELEMENTO EXISTENTE
+
+    public void Delete(final Object id){
+        if(id==null){
+            throw new IllegalArgumentException("El id es nulo");
+        }
+        EntityManager em=getEntityManager();
+        if(em==null){
+            throw new IllegalArgumentException("Error al acceder al repositorio");
+        }
+        T entity = (T) em.find(tipoDatos, id);
+
+        if(entity!=null){
+            em.remove(entity);
+        }else{
+            throw new IllegalArgumentException("Entidad no encontrada");
+        }
+    }
+
     public T findById(final Object id) {
         EntityManager em=null;
 
@@ -47,7 +84,6 @@ public abstract class AbscractDataPersistence <T> {
                 throw new IllegalStateException("Error al acceder al repositorio");
             }
         }catch(Exception ex) {
-
 
             throw new IllegalStateException("Error al acceder al repositorio"+ex);
         }
@@ -67,8 +103,20 @@ public abstract class AbscractDataPersistence <T> {
         return query.getResultList();
     }
 
-    public long count() {
-        return 0;
+    public long Count() {
+        EntityManager em = getEntityManager();
+        if (em == null) {
+            throw new IllegalStateException("Error al acceder al repositorio");
+        }
+
+        CriteriaBuilder cb = em.getCriteriaBuilder();
+        CriteriaQuery<Long> cq = cb.createQuery(Long.class);
+        Root<T> root = cq.from(tipoDatos);
+        cq.select(cb.count(root));
+
+        TypedQuery<Long> query = em.createQuery(cq);
+        return query.getSingleResult();
     }
+
 
 }

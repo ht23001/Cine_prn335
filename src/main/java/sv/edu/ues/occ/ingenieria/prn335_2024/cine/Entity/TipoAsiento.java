@@ -19,7 +19,7 @@ public class TipoAsiento {
 
     private Integer idTipoAsiento;
 
-
+   /* LO MISMO , CON ESTO NO FUNCIONA REST
     @OneToMany (fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "idTipoAsiento")
     public List<AsientoCaracteristica> AsientoCaracteristicaList;
 
@@ -30,7 +30,7 @@ public class TipoAsiento {
     public void setAsientoCaracteristicaList(List<AsientoCaracteristica> asientoCaracteristicaList) {
         AsientoCaracteristicaList = asientoCaracteristicaList;
     }
-
+     */
 
     @NotBlank
     @Size(max = 155, min = 3)

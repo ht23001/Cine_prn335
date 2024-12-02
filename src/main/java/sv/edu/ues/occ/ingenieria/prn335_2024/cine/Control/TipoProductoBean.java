@@ -34,22 +34,32 @@ public class TipoProductoBean extends AbscractDataPersistence<TipoProducto> impl
         return maxId;
     }
 
-    public void create(TipoProducto registro) {
+    // TODO ESTO ES DE REFACTORIZARLO, ESTOS METODOS DEBERIAN SER GENERALES EN LA CLASE ABSTRACTPERSITENCE
+
+
+    /*
+       public void create(TipoProducto registro) {
         em.persist(registro);
     }
-
-    public long count() { return em.createQuery("SELECT COUNT(t) FROM TipoProducto t", Long.class).getSingleResult(); }
-
-    public List<TipoProducto> findRange(int desde, int max) { return em.createQuery("SELECT t FROM TipoProducto t", TipoProducto.class) .setFirstResult(desde) .setMaxResults(max) .getResultList(); }
 
     public TipoProducto update(TipoProducto registro){
 
         return em.merge(registro);
     }
 
-    public List<TipoProducto> findAll() { return em.createQuery("SELECT t FROM TipoProducto t", TipoProducto.class).getResultList(); }
+    public long count() { return em.createQuery("SELECT COUNT(t) FROM TipoProducto t", Long.class).getSingleResult(); }
 
     public void delete(int idTipoProducto) {
         em.remove(em.find(TipoProducto.class, idTipoProducto));
     }
+
+      public List<TipoProducto> findRange(int desde, int max) { return em.createQuery("SELECT t FROM TipoProducto t", TipoProducto.class) .setFirstResult(desde) .setMaxResults(max) .getResultList(); }
+
+    public List<TipoProducto> findAll() { return em.createQuery("SELECT t FROM TipoProducto t", TipoProducto.class).getResultList(); }
+
+     */
+
+
+
+
 }

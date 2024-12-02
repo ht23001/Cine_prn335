@@ -1,23 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--
-  Created by IntelliJ IDEA.
-  User: severus
-  Date: 12/1/24
-  Time: 11:28 AM
--->
-<!DOCTYPE html
-        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<!DOCTYPE html>
+
 
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html">
+      xmlns:f= "jakarta.faces.core"
+      xmlns:h="jakarta.faces.html">
+
 
 <h:head>
-    <title>$Title$</title>
+    <title>Title</title>
 </h:head>
 
+   <h:form>
+
+       <h:commandButton value="Enviar Mensaje" action="#{frmWebSocket.enviarMensaje()}">
+           <f:ajax/>
+       </h:commandButton>
+
+       <f:websocket channel="chepe" onmessage="recibirMensaje"/>
+
+   </h:form>
+
+           <script type="text/javascript" >
+               function recibirMensaje(mensaje, canal, evento){
+                   console.log(mensaje);
+               }
+           </script>
+
 <h:body>
-  $END$
+
 </h:body>
 
 </html>

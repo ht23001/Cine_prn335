@@ -69,8 +69,7 @@ public class frmTipoSala implements Serializable {
              @Override
              public int count(Map<String, FilterMeta> map) {
                  try {
-
-                     return (int) tsBean.count();
+                     return (int) tsBean.Count();
                  } catch (Exception e) {
                      e.printStackTrace();
                      ///TODO: Enviar mensaje de error de acceso
@@ -191,7 +190,7 @@ public class frmTipoSala implements Serializable {
 
 
     public void btnGuardarHandler(ActionEvent actionEvent) {
-       this.tsBean.create(registro);
+       this.tsBean.Create(registro);
         this.registro=null;
         this.registros=tsBean.findRange(0,1000000);
         this.estado=ESTADO_CRUD.NINGUNO;
@@ -202,7 +201,7 @@ public class frmTipoSala implements Serializable {
     }
 
     public void btnModificarHandler(ActionEvent actionEvent) {
-         TipoSala actualizado= tsBean.update(registro);
+         TipoSala actualizado= tsBean.Update(registro);
         FacesMessage mensaje= new FacesMessage();
          if(actualizado!=null){
              this.registro=null;
@@ -220,7 +219,7 @@ public class frmTipoSala implements Serializable {
 
     public void btnEliminarHandler(ActionEvent actionEvent){
         FacesMessage mensaje = new FacesMessage();
-        tsBean.delete(registro.getIdTipoSala());
+        tsBean.Delete(registro.getIdTipoSala());
         mensaje.setSeverity(FacesMessage.SEVERITY_INFO);
         mensaje.setSummary("Registro eliminado con exito");
         facesContext.addMessage(null, mensaje);

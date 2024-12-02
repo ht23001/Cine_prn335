@@ -19,7 +19,11 @@ public class TipoReserva {
     private Integer idTipoReserva;
 
 
+    /*COMENTO ESTO  GENERA ERROR EN LOS REST
+
+
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "idTipoReserva")
+    @JsonIgnore
     public List<Reserva> ReservaList;
 
     public List<Reserva> getReservaList() {
@@ -29,6 +33,9 @@ public class TipoReserva {
     public void setReservaList(List<Reserva> reservaList) {
         ReservaList = reservaList;
     }
+
+    en teoria con @JSONignore se arrega */
+
 
 
     @NotBlank

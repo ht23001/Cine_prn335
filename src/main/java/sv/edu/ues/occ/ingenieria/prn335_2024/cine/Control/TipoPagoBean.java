@@ -33,11 +33,26 @@ public class TipoPagoBean extends AbscractDataPersistence<TipoPago> implements S
         Integer maxId = query.getSingleResult(); return maxId;
     }
 
+    // TODO ESTO ES DE REFACTORIZARLO, ESTOS METODOS DEBERIAN SER GENERALES EN LA CLASE ABSTRACTPERSITENCE
+
+    /*
+
     public void create(TipoPago registro) {
         em.persist(registro);
     }
 
     public long count() { return em.createQuery("SELECT COUNT(t) FROM TipoPago t", Long.class).getSingleResult(); }
+
+      public void delete(int idTipoPago) {
+        em.remove(em.find(TipoPago.class, idTipoPago));
+    }
+
+      public TipoPago update(TipoPago registro){
+
+        return em.merge(registro);
+    }
+
+
 
     public List<TipoPago> findRange(int desde, int max) { return em.createQuery("SELECT t FROM TipoPago t", TipoPago.class) .setFirstResult(desde) .setMaxResults(max) .getResultList(); }
 
@@ -46,16 +61,13 @@ public class TipoPagoBean extends AbscractDataPersistence<TipoPago> implements S
         return em.createQuery("SELECT t FROM TipoPago t ORDER BY t." + sortField + " " + order, TipoPago.class) .setFirstResult(desde) .setMaxResults(max) .getResultList();
     }
 
-    public TipoPago update(TipoPago registro){
-
-        return em.merge(registro);
-    }
-
     public List<TipoPago> findAll() { return em.createQuery("SELECT t FROM TipoPago t", TipoPago.class).getResultList(); }
 
-    public void delete(int idTipoPago) {
-        em.remove(em.find(TipoPago.class, idTipoPago));
-    }
+
+
+     */
+
+
 
 
 }

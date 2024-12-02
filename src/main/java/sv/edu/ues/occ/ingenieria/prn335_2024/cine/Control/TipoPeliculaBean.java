@@ -30,16 +30,19 @@ public class TipoPeliculaBean extends AbscractDataPersistence<TipoPelicula> impl
         Integer maxId = query.getSingleResult(); return maxId;
     }
 
-    public void create(TipoPelicula registro) {
+
+
+    // TODO ESTO ES DE REFACTORIZARLO, ESTOS METODOS DEBERIAN SER GENERALES EN LA CLASE ABSTRACTPERSITENCE
+
+
+    /*
+      public void create(TipoPelicula registro) {
         em.persist(registro);
     }
 
     public long count() { return em.createQuery("SELECT COUNT(t) FROM TipoPelicula t", Long.class).getSingleResult(); }
 
-    public List<TipoPelicula> findRange(int desde, int max) { return em.createQuery("SELECT tp FROM TipoPelicula tp", TipoPelicula.class) .setFirstResult(desde) .setMaxResults(max) .getResultList(); }
-
-
-    public TipoPelicula update(TipoPelicula registro){
+     public TipoPelicula update(TipoPelicula registro){
 
         return em.merge(registro);
     }
@@ -49,5 +52,14 @@ public class TipoPeliculaBean extends AbscractDataPersistence<TipoPelicula> impl
     public void delete(int idTipoPelicula) {
         em.remove(em.find(TipoPelicula.class, idTipoPelicula));
     }
+
+    public List<TipoPelicula> findRange(int desde, int max) { return em.createQuery("SELECT tp FROM TipoPelicula tp", TipoPelicula.class) .setFirstResult(desde) .setMaxResults(max) .getResultList(); }
+
+
+     */
+
+
+
+
 
 }

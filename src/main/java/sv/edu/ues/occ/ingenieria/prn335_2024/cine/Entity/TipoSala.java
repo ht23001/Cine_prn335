@@ -19,6 +19,7 @@ public class TipoSala {
     @Column(name = "id_tipo_sala", nullable = false)
     private Integer idTipoSala;
 
+    /* ESTO TAMBIEN GENERA ERROR EN LOS REST
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "idTipoSala")
     public List<SalaCaracteristica> SalaCAracteristicaList;
 
@@ -26,9 +27,11 @@ public class TipoSala {
         return SalaCAracteristicaList;
     }
 
-    public void setSalaCAracteristicaList(List<SalaCaracteristica> salaCAracteristicaList) {
-        SalaCAracteristicaList = salaCAracteristicaList;
+    public void setSalaCaracteristicaList(List<SalaCaracteristica> salaCaracteristicaList) {
+        SalaCAracteristicaList = salaCaracteristicaList;
     }
+
+     */
 
 
     // @Pattern(regexp = "\\d\\d\\d\\d\\d\\d\\d\\d-\\d", message = "agrega dui puto")

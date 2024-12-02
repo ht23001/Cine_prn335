@@ -33,7 +33,6 @@ public class frmTipoProducto implements Serializable {
 
     ESTADO_CRUD estado;
 
-
     LazyDataModel<TipoProducto> modelo;
 
 
@@ -66,7 +65,7 @@ public class frmTipoProducto implements Serializable {
             public int count(Map<String, FilterMeta> map) {
                 try {
 
-                    return  (int)tpBean.count();
+                    return  (int)tpBean.Count();
                 }catch (Exception e){
                     e.printStackTrace();
                     ///TODO: Enviar mensaje de error de acceso
@@ -155,7 +154,7 @@ public class frmTipoProducto implements Serializable {
 
     public void btnGuardarHandler(ActionEvent actionEvent) {
         try {
-            this.tpBean.create(registro);
+            this.tpBean.Create(registro);
             this.registro =null;
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Registro guardado"));
         } catch (Exception e) {
@@ -168,7 +167,7 @@ public class frmTipoProducto implements Serializable {
 
     public void btnEliminarHandler(ActionEvent actionEvent){
         FacesMessage mensaje = new FacesMessage();
-        tpBean.delete(registro.getIdTipoProducto());
+        tpBean.Delete(registro.getIdTipoProducto());
         mensaje.setSeverity(FacesMessage.SEVERITY_INFO);
         mensaje.setSummary("Registro eliminado con exito");
         facesContext.addMessage(null, mensaje);
@@ -183,7 +182,7 @@ public class frmTipoProducto implements Serializable {
     }
 
     public void btnModificarHandler(ActionEvent actionEvent) {
-        TipoProducto actualizado= tpBean.update(registro);
+        TipoProducto actualizado= tpBean.Update(registro);
         FacesMessage mensaje= new FacesMessage();
         if(actualizado!=null){
             this.registro =null;

@@ -5,6 +5,7 @@ import jakarta.ejb.Stateless;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.TypedQuery;
+import sv.edu.ues.occ.ingenieria.prn335_2024.cine.Entity.TipoPelicula;
 import sv.edu.ues.occ.ingenieria.prn335_2024.cine.Entity.TipoReserva;
 import sv.edu.ues.occ.ingenieria.prn335_2024.cine.Entity.TipoSala;
 
@@ -29,23 +30,36 @@ public class TipoReservaBean extends AbscractDataPersistence<TipoReserva> implem
 
 
 
+     // TODO ESTO ES DE REFACTORIZARLO, ESTOS METODOS DEBERIAN SER GENERALES EN LA CLASE ABSTRACTPERSITENCE
+
+
+    /*
     public long count() { return em.createQuery("SELECT COUNT(t) FROM TipoReserva t", Long.class).getSingleResult(); }
 
-    public void create(TipoReserva registro) {
+     public void create(TipoReserva registro) {
         em.persist(registro);
     }
-    public TipoReserva update(TipoReserva registro){
+
+     public TipoReserva update(TipoReserva registro){
 
         return em.merge(registro);
     }
 
+     public void delete(int idTipoReserva) {
+        em.remove(em.find(TipoReserva.class, idTipoReserva));
+    }
+
+     public List<TipoReserva> findRange(int desde, int max) { return em.createQuery("SELECT tr FROM TipoReserva tr", TipoReserva.class) .setFirstResult(desde) .setMaxResults(max) .getResultList(); }
+
     public List<TipoReserva> findAll() { return em.createQuery("SELECT t FROM TipoReserva t", TipoReserva.class).getResultList(); }
+
+     */
+
+
 
     public Integer obtenerMaxIdTipoReserva(TipoReserva registro) { TypedQuery<Integer> query = em.createNamedQuery("TipoReserva.IdMaximo", Integer.class); Integer maxId = query.getSingleResult(); return maxId; }
 
-    public void delete(int idTipoReserva) {
-        em.remove(em.find(TipoReserva.class, idTipoReserva));
-    }
+
 }
 
 

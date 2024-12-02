@@ -63,7 +63,7 @@ public class frmTipoReserva implements Serializable {
              public int count(Map<String, FilterMeta> map) {
                  try {
 
-                     return  (int)dataBean.count();
+                     return  (int)dataBean.Count();
                  }catch (Exception e){
                      e.printStackTrace();
                      ///TODO: Enviar mensaje de error de acceso
@@ -130,7 +130,7 @@ public class frmTipoReserva implements Serializable {
 
     public void btnGuardarHandler(ActionEvent actionEvent) {
         try {
-            this.dataBean.create(registro);
+            this.dataBean.Create(registro);
             this.registro =null;
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Registro guardado"));
         } catch (Exception e) {
@@ -143,7 +143,7 @@ public class frmTipoReserva implements Serializable {
 
     public void btnEliminarHandler(ActionEvent actionEvent){
         FacesMessage mensaje = new FacesMessage();
-        dataBean.delete(registro.getIdTipoReserva());
+        dataBean.Delete(registro.getIdTipoReserva());
         mensaje.setSeverity(FacesMessage.SEVERITY_INFO);
         mensaje.setSummary("Registro eliminado con exito");
         facesContext.addMessage(null, mensaje);
@@ -158,7 +158,7 @@ public class frmTipoReserva implements Serializable {
     }
 
     public void btnModificarHandler(ActionEvent actionEvent) {
-        TipoReserva actualizado= dataBean.update(registro);
+        TipoReserva actualizado= dataBean.Update(registro);
         FacesMessage mensaje= new FacesMessage();
         if(actualizado!=null){
             this.registro =null;

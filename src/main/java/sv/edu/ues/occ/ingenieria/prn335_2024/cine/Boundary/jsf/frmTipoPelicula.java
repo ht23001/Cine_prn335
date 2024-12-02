@@ -68,7 +68,7 @@ public class frmTipoPelicula implements Serializable {
             public int count(Map<String, FilterMeta> map) {
                 try {
 
-                    return (int) tpBean.count();
+                    return (int) tpBean.Count();
                 } catch (Exception e) {
                     e.printStackTrace();
                     ///TODO: Enviar mensaje de error de acceso
@@ -189,7 +189,7 @@ public class frmTipoPelicula implements Serializable {
 
 
     public void btnGuardarHandler(ActionEvent actionEvent) {
-        this.tpBean.create(registro);
+        this.tpBean.Create(registro);
         this.registro=null;
         this.registros= tpBean.findRange(0,1000000);
         this.estado=ESTADO_CRUD.NINGUNO;
@@ -204,7 +204,7 @@ public class frmTipoPelicula implements Serializable {
     }
 
     public void btnModificarHandler(ActionEvent actionEvent) {
-        TipoPelicula actualizado= tpBean.update(registro);
+        TipoPelicula actualizado= tpBean.Update(registro);
         FacesMessage mensaje= new FacesMessage();
         if(actualizado!=null){
             this.registro=null;
@@ -222,7 +222,7 @@ public class frmTipoPelicula implements Serializable {
 
     public void btnEliminarHandler(ActionEvent actionEvent){
         FacesMessage mensaje = new FacesMessage();
-        tpBean.delete(registro.getIdTipoPelicula());
+        tpBean.Delete(registro.getIdTipoPelicula());
         mensaje.setSeverity(FacesMessage.SEVERITY_INFO);
         mensaje.setSummary("Registro eliminado con exito");
         facesContext.addMessage(null, mensaje);

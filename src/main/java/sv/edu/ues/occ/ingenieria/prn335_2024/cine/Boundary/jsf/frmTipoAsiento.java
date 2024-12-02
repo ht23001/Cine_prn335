@@ -73,7 +73,7 @@ public class frmTipoAsiento implements Serializable {
             public int count(Map<String, FilterMeta> map) {
                 try {
 
-                    return (int) taBean.count();
+                    return (int) taBean.Count();
                 } catch (Exception e) {
                     e.printStackTrace();
                     ///TODO: Enviar mensaje de error de acceso
@@ -181,7 +181,7 @@ public class frmTipoAsiento implements Serializable {
 
 
     public void btnGuardarHandler(ActionEvent actionEvent) {
-        this.taBean.create(registro);
+        this.taBean.Create(registro);
         this.registro=null;
         this.registros= taBean.findRange(0,1000000);
         this.estado=ESTADO_CRUD.NINGUNO;
@@ -192,7 +192,7 @@ public class frmTipoAsiento implements Serializable {
     }
 
     public void btnModificarHandler(ActionEvent actionEvent) {
-        TipoAsiento actualizado= taBean.update(registro);
+        TipoAsiento actualizado= taBean.Update(registro);
         FacesMessage mensaje= new FacesMessage();
         if(actualizado!=null){
             this.registro=null;
@@ -210,7 +210,7 @@ public class frmTipoAsiento implements Serializable {
 
     public void btnEliminarHandler(ActionEvent actionEvent){
         FacesMessage mensaje = new FacesMessage();
-        taBean.delete(registro.getIdTipoAsiento());
+        taBean.Delete(registro.getIdTipoAsiento());
         mensaje.setSeverity(FacesMessage.SEVERITY_INFO);
         mensaje.setSummary("Registro eliminado con exito");
         facesContext.addMessage(null, mensaje);
@@ -218,8 +218,5 @@ public class frmTipoAsiento implements Serializable {
         this.estado=ESTADO_CRUD.NINGUNO;
     }
     
-    
-
-
 
 }

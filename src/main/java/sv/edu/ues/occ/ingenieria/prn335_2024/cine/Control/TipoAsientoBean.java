@@ -27,10 +27,15 @@ public class TipoAsientoBean extends AbscractDataPersistence<TipoAsiento> implem
     @Override
     public EntityManager getEntityManager(){return em;}
 
-    public Integer obtenerMaxIdTipoAsiento(TipoAsiento registro) {
-        TypedQuery<Integer> query = em.createNamedQuery("TipoAsiento.IdMaximo", Integer.class);
-        return query.getSingleResult();
-    }
+    // TODO ESTO ES DE REFACTORIZARLO, ESTOS METODOS DEBERIAN SER GENERALES EN LA CLASE ABSTRACTPERSITENCE
+
+
+
+
+    /*
+
+
+
 
     public long count() { return em.createQuery("SELECT COUNT(ta) FROM TipoAsiento ta", Long.class).getSingleResult(); }
 
@@ -47,4 +52,12 @@ public class TipoAsientoBean extends AbscractDataPersistence<TipoAsiento> implem
     public void delete(int id) {
         em.remove(em.find(TipoAsiento.class, id));
     }
+
+     */
+
+    public Integer obtenerMaxIdTipoAsiento(TipoAsiento registro) {
+        TypedQuery<Integer> query = em.createNamedQuery("TipoAsiento.IdMaximo", Integer.class);
+        return query.getSingleResult();
+    }
+
 }

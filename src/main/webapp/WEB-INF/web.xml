@@ -15,18 +15,23 @@
         <param-value>/WEB-INF/primefaces.taglib.xml</param-value>
     </context-param>
 
+
+    <context-param>
+        <param-name>jakarta.faces.ENABLE_WEBSOCKET_ENDPOINT</param-name>
+        <param-value>true</param-value>
+    </context-param>
+
     <servlet>
        <servlet-name>FacesServelet</servlet-name>
        <servlet-class>jakarta.faces.webapp.FacesServlet</servlet-class>
        <load-on-startup>1</load-on-startup>
 
-
    </servlet>
+
     <servlet-mapping>
         <servlet-name>FacesServelet</servlet-name>
         <url-pattern>*.jsf</url-pattern>
 
-            
     </servlet-mapping>
 
 </web-app>
