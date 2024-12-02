@@ -1,6 +1,5 @@
 package sv.edu.ues.occ.ingenieria.prn335_2024.cine.Boundary.jsf;
 
-
 import jakarta.annotation.PostConstruct;
 import jakarta.enterprise.context.SessionScoped;
 import jakarta.faces.application.FacesMessage;
@@ -12,8 +11,11 @@ import org.primefaces.event.SelectEvent;
 import org.primefaces.model.FilterMeta;
 import org.primefaces.model.LazyDataModel;
 import org.primefaces.model.SortMeta;
-import sv.edu.ues.occ.ingenieria.prn335_2024.cine.Control.TipoProductoBean;
-import sv.edu.ues.occ.ingenieria.prn335_2024.cine.Entity.TipoProducto;
+import sv.edu.ues.occ.ingenieria.prn335_2024.cine.Control.PeliculaBean;
+import sv.edu.ues.occ.ingenieria.prn335_2024.cine.Entity.Pelicula;
+import sv.edu.ues.occ.ingenieria.prn335_2024.cine.Entity.TipoAsiento;
+import sv.edu.ues.occ.ingenieria.prn335_2024.cine.Entity.TipoPago;
+import sv.edu.ues.occ.ingenieria.prn335_2024.cine.Entity.TipoReserva;
 
 import java.io.Serializable;
 import java.util.List;
@@ -21,41 +23,46 @@ import java.util.Map;
 
 @Named
 @SessionScoped
-public class frmTipoProducto implements Serializable {
+public class frmPelicula implements Serializable {
+
 
     @Inject
     FacesContext facesContext;
 
     @Inject
-    TipoProductoBean tpBean;
+    PeliculaBean pBean;
 
     ESTADO_CRUD estado;
 
-    LazyDataModel<TipoProducto> modelo;
+
+    LazyDataModel<Pelicula> modelo;
 
 
     @PostConstruct
     public void init(){
         estado=ESTADO_CRUD.MODIFICAR;
-        modelo=new LazyDataModel<TipoProducto>() {
+        modelo=new LazyDataModel<Pelicula>() {
 
             @Override
-            public String getRowKey(TipoProducto object) {
-                if (object != null && object.getIdTipoProducto() != null) {
-                    return object.getIdTipoProducto().toString(); }
+            public String getRowKey(Pelicula object) {
+                if (object != null && object.getIdPelicula() != null) {
+                    return object.getIdPelicula().toString();
+                }
                 return null;
             }
 
             @Override
-            public TipoProducto getRowData(String rowKey) {
+            public Pelicula getRowData(String rowKey) {
                 if (rowKey != null && getWrappedData() != null) {
-                    return getWrappedData().stream().filter(r -> rowKey.equals(r.getIdTipoProducto().toString())).findFirst().orElse(null); }
+                    return getWrappedData().stream().filter(r -> rowKey.equals(r.getIdPelicula().toString())).findFirst().orElse(null);
+                }
                 return null;
             }
 
+
             @Override
-            public List<TipoProducto> getWrappedData() {
-                return (List<TipoProducto>) super.getWrappedData();
+            public List<Pelicula> getWrappedData() {
+                return (List<Pelicula>) super.getWrappedData();
             }
 
 
@@ -63,7 +70,7 @@ public class frmTipoProducto implements Serializable {
             public int count(Map<String, FilterMeta> map) {
                 try {
 
-                    return  (int)tpBean.Count();
+                    return  (int) pBean.count();
                 }catch (Exception e){
                     e.printStackTrace();
                     ///TODO: Enviar mensaje de error de acceso
@@ -72,12 +79,12 @@ public class frmTipoProducto implements Serializable {
             }
 
             @Override
-            public List<TipoProducto> load(int desde, int max, Map<String, SortMeta> map, Map<String, FilterMeta> map1) {
+            public List<Pelicula> load(int desde, int max, Map<String, SortMeta> map, Map<String, FilterMeta> map1) {
 
 
                 try {
                     if(desde>=0 && max>0){
-                        return tpBean.findRange(desde,max);
+                        return pBean.findRange(desde,max);
 
                     }
 
@@ -94,65 +101,40 @@ public class frmTipoProducto implements Serializable {
 
     }
 
-    TipoProducto registro;
+    Pelicula registro;
 
 
-    public LazyDataModel<TipoProducto> getModelo() {
+    public LazyDataModel<Pelicula> getModelo() {
         return modelo;
-
     }
 
-    public void setModelo(LazyDataModel<TipoProducto> modelo) {
+    public void setModelo(LazyDataModel<Pelicula> modelo) {
         this.modelo = modelo;
     }
 
-    public ESTADO_CRUD getEstado() {
-        return estado;
-    }
-
-    public void setEstado(ESTADO_CRUD estado) {
-        this.estado = estado;
-    }
-
-    public FacesContext getFacesContext() {
-        return facesContext;
-    }
-
-    public void setFacesContext(FacesContext facesContext) {
-        this.facesContext = facesContext;
-    }
-
-    public TipoProducto getRegistro() {
+    public Pelicula getRegistro() {
         return registro;
     }
 
-    public void setRegistro(TipoProducto registro) {
+    public void setRegistro(Pelicula registro) {
         this.registro = registro;
     }
 
-    public void onRowSelect(SelectEvent<TipoProducto> event) {
+    public void onRowSelect(SelectEvent<Pelicula> event) {
         registro = event.getObject();
         estado = ESTADO_CRUD.MODIFICAR;
-        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Fila Seleccionada", "ID: " + registro.getIdTipoProducto())); }
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Fila Seleccionada", "ID: " + registro.getIdPelicula())); }
 
     public void btnNuevoHandler(ActionEvent actionEvent){
-        this.registro = new TipoProducto();
-        if(tpBean.obtenerMaxIdTipoProducto(registro)==null){
-            this.registro.setIdTipoProducto(1);
-            this.registro.setActivo(true);
-            this.estado=ESTADO_CRUD.CREAR;
-        }else{
-            this.registro.setIdTipoProducto(tpBean.obtenerMaxIdTipoProducto(registro)+1);
-            this.registro.setActivo(true);
-            this.estado=ESTADO_CRUD.CREAR;
-        }
-
+        this.registro = new Pelicula();
+        this.registro.setIdPelicula((long) (pBean.obtenerMaxIdPelicula(registro)+1));
+        this.estado=ESTADO_CRUD.CREAR;
 
     }
 
     public void btnGuardarHandler(ActionEvent actionEvent) {
         try {
-            this.tpBean.Create(registro);
+            this.pBean.create(registro);
             this.registro =null;
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Registro guardado"));
         } catch (Exception e) {
@@ -165,7 +147,7 @@ public class frmTipoProducto implements Serializable {
 
     public void btnEliminarHandler(ActionEvent actionEvent){
         FacesMessage mensaje = new FacesMessage();
-        tpBean.Delete(registro.getIdTipoProducto());
+        pBean.delete(registro.getIdPelicula());
         mensaje.setSeverity(FacesMessage.SEVERITY_INFO);
         mensaje.setSummary("Registro eliminado con exito");
         facesContext.addMessage(null, mensaje);
@@ -180,7 +162,7 @@ public class frmTipoProducto implements Serializable {
     }
 
     public void btnModificarHandler(ActionEvent actionEvent) {
-        TipoProducto actualizado= tpBean.Update(registro);
+        Pelicula actualizado= pBean.update(registro);
         FacesMessage mensaje= new FacesMessage();
         if(actualizado!=null){
             this.registro =null;
@@ -194,6 +176,14 @@ public class frmTipoProducto implements Serializable {
 
         }
         facesContext.addMessage(null, mensaje);
+    }
+
+    public ESTADO_CRUD getEstado() {
+        return estado;
+    }
+
+    public void setEstado(ESTADO_CRUD estado) {
+        this.estado = estado;
     }
 
 

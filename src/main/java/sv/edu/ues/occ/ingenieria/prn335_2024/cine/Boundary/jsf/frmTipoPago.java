@@ -13,7 +13,6 @@ import org.primefaces.model.LazyDataModel;
 import org.primefaces.model.SortMeta;
 import sv.edu.ues.occ.ingenieria.prn335_2024.cine.Control.TipoPagoBean;
 import sv.edu.ues.occ.ingenieria.prn335_2024.cine.Entity.TipoPago;
-import sv.edu.ues.occ.ingenieria.prn335_2024.cine.Entity.TipoReserva;
 
 import java.io.Serializable;
 import java.util.List;

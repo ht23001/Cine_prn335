@@ -7,7 +7,6 @@ import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.TypedQuery;
 import sv.edu.ues.occ.ingenieria.prn335_2024.cine.Entity.TipoPelicula;
 import sv.edu.ues.occ.ingenieria.prn335_2024.cine.Entity.TipoReserva;
-import sv.edu.ues.occ.ingenieria.prn335_2024.cine.Entity.TipoSala;
 
 
 import java.io.Serializable;

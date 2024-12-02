@@ -67,8 +67,12 @@
                 <artifactId>liberty-maven-plugin</artifactId>
                 <version>3.8.2</version>
                 <configuration>
+<<<<<<< HEAD
                     <installDirectory>/home/severus/Downloads/OpenLIberty/wlp10_24_0_0_8</installDirectory>
                     <serverName>servidorsito</serverName>
+=======
+
+                   
                 </configuration>
             </plugin>
             <plugin>

@@ -1,19 +1,23 @@
 package sv.edu.ues.occ.ingenieria.prn335_2024.cine.Control;
 
+import jakarta.ejb.LocalBean;
+import jakarta.ejb.Stateless;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.Query;
 import jakarta.persistence.TypedQuery;
 import sv.edu.ues.occ.ingenieria.prn335_2024.cine.Entity.Sala;
+import sv.edu.ues.occ.ingenieria.prn335_2024.cine.Entity.Sucursal;
 
 import java.io.Serializable;
 import java.util.Collections;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+@Stateless
+@LocalBean
 
-public class
-SalaBean extends AbscractDataPersistence<Sala> implements Serializable {
+public class SalaBean extends AbscractDataPersistence<Sala> implements Serializable {
 
     @PersistenceContext(unitName = "CinePU")
     EntityManager em;
@@ -45,5 +49,31 @@ SalaBean extends AbscractDataPersistence<Sala> implements Serializable {
         }
         return Collections.emptyList();
     }
+
+    public long count() {
+        return em.createQuery("SELECT COUNT(t) FROM TipoSala t", Long.class).getSingleResult();
+    }
+    public void create(Sala registro) {
+        em.persist(registro);
+    }
+    public Sala update(Sala registro){
+
+        return em.merge(registro);
+    }
+
+    public Integer obtenerMaxIdSala(Sala registro) { TypedQuery<Integer> query = em.createNamedQuery("Sala.IdMaximo", Integer.class);
+        Integer maxId = query.getSingleResult(); return maxId;
+    }
+
+    public void delete(int idSala) {
+        em.remove(em.find(Sala.class, idSala));
+    }
+
+
+    public List<Sala> findRange(int desde, int max) {
+        return em.createQuery("SELECT t FROM Sala t", Sala.class) .setFirstResult(desde) .setMaxResults(max) .getResultList();
+    }
+
+
 
 }

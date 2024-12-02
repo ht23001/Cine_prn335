@@ -14,16 +14,19 @@
       xmlns:f="jakarta.faces.facelets">
 
 <h:head>
+
+    <title>PAGINA PRINCIPAL</title>
+
     <h:outputStylesheet library="estilos" name="basico_templates.css"/>
 </h:head>
 
 <h:body>
+
     <div class="ui-g">
         <p:growl/>
         <div class="ui-g-12 ui-md-2">
             <h:form id="frmMenuPrincipal">
-                <p:menu model="#{frmMenu.modelo}" appendTo="body"
-                        toggleable="true"/>
+                <p:menu model="#{frmMenu.model}" appendTo="body" toggleable="true"/>
             </h:form>
         </div>
 
@@ -48,7 +51,9 @@
                 </div>
             </div>
         </div>
-
+        <div class="ui-g-12">
+            Todos los derechos reservados por la empresa...@2024
+        </div>
     </div>
     <f:insert name="extras"></f:insert>
 </h:body>
