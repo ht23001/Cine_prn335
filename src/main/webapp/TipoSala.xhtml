@@ -6,8 +6,8 @@
                xmlns:p="primefaces"
                xmlns:f="jakarta.faces.facelets"
                template="WEB-INF/templates/principal.xhtml"
+               xmlns:crud="jakarta.faces.composite/crud"
 >
-
 
     <f:define name="titulo">
         TIPO SALA
@@ -28,8 +28,7 @@
                                 selection="#{frmTipoSala.registro}"
                                 paginator="true"
                         >
-                            <p:ajax event="rowSelect"  update=":pnlDetalle" process="@this" oncomplete="PF('customerDialog').show()"
-                            />
+                            <p:ajax event="rowSelect"  update=":pnlDetalle" process="@this" oncomplete="PF('customerDialog').show()" />
                             <p:column headerText="ID">
                                 <h:outputText value="#{r.idTipoSala}"/>
                             </p:column>
@@ -37,7 +36,7 @@
                                 <h:outputText value="#{r.nombreTipoSala}"/>
                             </p:column>
                             <p:column headerText="Estado">
-                                <h:outputText value="#{r.activoTipoSala?'ACTIVO':'INACTIVO'}"/>
+                                <h:outputText value="#{r.activoTipoSala ? 'ACTIVO' : 'INACTIVO'}"/>
                             </p:column>
                             <p:column headerText="Expresión Regular">
                                 <h:outputText value="#{r.expresionRegular}"/>
@@ -45,12 +44,11 @@
                             <p:column headerText="Comentarios">
                                 <h:outputText value="#{r.comentariosTipoSala}"/>
                             </p:column>
-
                         </p:dataTable>
                     </h:panelGrid>
 
                     <p:growl life="5000"/>
-                    <h:panelGrid columns="#{frmTipoSala.estado!='NINGUNO'?'2':'1'}">
+                    <h:panelGrid columns="#{frmTipoSala.estado != 'NINGUNO' ? '2' : '1'}">
                         <p:commandButton ajax="true"
                                          actionListener="#{frmTipoSala.btnNuevoHandler}"
                                          value="Nuevo"
@@ -77,27 +75,7 @@
                                 </h:panelGrid>
                                 <p:messages showSummary="true" showDetail="true"/>
                                 <h:panelGrid columns="4">
-                                    <p:commandButton value="Guardar" ajax="true"
-                                                     process="@form"
-                                                     rendered="#{frmTipoSala.estado=='CREAR'}"
-                                                     update=":pnlDetalle :pnlTabla"
-                                                     actionListener="#{frmTipoSala.btnGuardarHandler}"/>
-                                    <p:commandButton ajax="true"
-                                                     actionListener="#{frmTipoSala.btnCancelarHandler}"
-                                                     value="Cancelar"
-                                                     process="@this" update=":pnlDetalle :pnlTabla"
-                                                     rendered="true"
-                                    />
-                                    <p:commandButton value="Modificar" ajax="true"
-                                                     process="@form"
-                                                     update=":pnlDetalle :pnlTabla"
-                                                     rendered="#{frmTipoSala.estado!='CREAR'}"
-                                                     actionListener="#{frmTipoSala.btnModificarHandler}"/>
-                                    <p:commandButton value="Eliminar" ajax="true"
-                                                     process="@form"
-                                                     update=":pnlDetalle :pnlTabla"
-                                                     rendered="#{frmTipoSala.estado!='CREAR'}"
-                                                     actionListener="#{frmTipoSala.btnEliminarHandler}"/>
+                                    <crud:botonesTop frm="#{frmTipoSala}"/>
                                 </h:panelGrid>
                             </h:panelGrid>
                         </h:form>
@@ -109,4 +87,3 @@
     </f:define>
 
 </f:composition>
-

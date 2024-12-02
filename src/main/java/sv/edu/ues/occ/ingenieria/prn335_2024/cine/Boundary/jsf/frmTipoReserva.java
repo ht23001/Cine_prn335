@@ -1,184 +1,72 @@
 package sv.edu.ues.occ.ingenieria.prn335_2024.cine.Boundary.jsf;
 
-
-import jakarta.annotation.PostConstruct;
-import jakarta.enterprise.context.SessionScoped;
-import jakarta.faces.application.FacesMessage;
-import jakarta.faces.context.FacesContext;
-import jakarta.faces.event.ActionEvent;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
-import org.primefaces.event.SelectEvent;
-import org.primefaces.model.FilterMeta;
-import org.primefaces.model.LazyDataModel;
-import org.primefaces.model.SortMeta;
+import jakarta.enterprise.context.SessionScoped;
 import sv.edu.ues.occ.ingenieria.prn335_2024.cine.Control.TipoReservaBean;
 import sv.edu.ues.occ.ingenieria.prn335_2024.cine.Entity.TipoReserva;
 
-import java.io.Serializable;
 import java.util.List;
-import java.util.Map;
+import java.util.Optional;
 
 @Named
 @SessionScoped
-public class frmTipoReserva implements Serializable {
-
-    @Inject
-    FacesContext facesContext;
+public class frmTipoReserva extends AbstractPfFrm<TipoReserva> {
 
     @Inject
     TipoReservaBean dataBean;
 
-    ESTADO_CRUD estado;
-
-
-    LazyDataModel<TipoReserva> modelo;
-
-
-     @PostConstruct
-    public void init(){
-         estado=ESTADO_CRUD.MODIFICAR;
-         modelo=new LazyDataModel<TipoReserva>() {
-
-             @Override public String getRowKey(TipoReserva object) {
-                 if (object != null && object.getIdTipoReserva() != null) {
-                     return object.getIdTipoReserva().toString(); }
-                 return null;
-             }
-
-             @Override
-             public TipoReserva getRowData(String rowKey) {
-                 if (rowKey != null && getWrappedData() != null) {
-                     return getWrappedData().stream().filter(r -> rowKey.equals(r.getIdTipoReserva().toString())).findFirst().orElse(null); }
-                 return null;
-             }
-
-             @Override
-             public List<TipoReserva> getWrappedData() {
-                 return (List<TipoReserva>) super.getWrappedData();
-             }
-
-
-             @Override
-             public int count(Map<String, FilterMeta> map) {
-                 try {
-
-                     return  (int)dataBean.count();
-                 }catch (Exception e){
-                     e.printStackTrace();
-                     ///TODO: Enviar mensaje de error de acceso
-                 }
-                 return 0;
-             }
-
-             @Override
-             public List<TipoReserva> load(int desde, int max, Map<String, SortMeta> map, Map<String, FilterMeta> map1) {
-
-
-                 try {
-                     if(desde>=0 && max>0){
-                         return dataBean.findRange(desde,max);
-
-                     }
-
-                 }catch (Exception e){
-
-                     e.printStackTrace();
-                    ///TODO: enviar mensaje de error en el repositorio
-                 }
-
-                 return List.of();
-             }
-         };
-
-
+    @Override
+    protected String getRowKeyImpl(TipoReserva object) {
+        return object != null && object.getIdTipoReserva() != null ? object.getIdTipoReserva().toString() : null;
     }
 
-    TipoReserva registro;
-
-
-    public LazyDataModel<TipoReserva> getModelo() {
-        return modelo;
-
-    }
-
-    public void setModelo(LazyDataModel<TipoReserva> modelo) {
-        this.modelo = modelo;
-    }
-
-
-    public TipoReserva getRegistro() {
-        return registro;
-    }
-
-    public void setRegistro(TipoReserva registro) {
-        this.registro = registro;
-    }
-
-    public void onRowSelect(SelectEvent<TipoReserva> event) {
-        registro = event.getObject();
-        estado = ESTADO_CRUD.MODIFICAR;
-        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Fila Seleccionada", "ID: " + registro.getIdTipoReserva())); }
-
-    public void btnNuevoHandler(ActionEvent actionEvent){
-        this.registro = new TipoReserva();
-        this.registro.setIdTipoReserva(dataBean.obtenerMaxIdTipoReserva(registro)+1);
-        this.registro.setActivo(true);
-        this.estado=ESTADO_CRUD.CREAR;
-
-    }
-
-    public void btnGuardarHandler(ActionEvent actionEvent) {
-        try {
-            this.dataBean.create(registro);
-            this.registro =null;
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Registro guardado"));
-        } catch (Exception e) {
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", "No se pudo guardar el registro"));
-            e.printStackTrace();
+    @Override
+    protected TipoReserva getRowDataImpl(String rowKey) {
+        if (rowKey == null) {
+            return null;
         }
-        this.registro = null;
-        this.estado = ESTADO_CRUD.MODIFICAR;
+        Optional<TipoReserva> result = registros.stream()
+                .filter(r -> rowKey.equals(String.valueOf(r.getIdTipoReserva())))
+                .findFirst();
+        return result.orElse(null);
     }
 
-    public void btnEliminarHandler(ActionEvent actionEvent){
-        FacesMessage mensaje = new FacesMessage();
-        dataBean.delete(registro.getIdTipoReserva());
-        mensaje.setSeverity(FacesMessage.SEVERITY_INFO);
-        mensaje.setSummary("Registro eliminado con exito");
-        facesContext.addMessage(null, mensaje);
-        this.registro =null;
-        this.estado=ESTADO_CRUD.MODIFICAR;
+    @Override
+    protected List<TipoReserva> findRange(int desde, int max) {
+        return dataBean.findRange(desde, max);
     }
 
-    public void btnCancelarHandler(ActionEvent actionEvent){
-
-        this.registro = null;
-        this.estado=ESTADO_CRUD.MODIFICAR;
+    @Override
+    protected long countImpl() {
+        return dataBean.count();
     }
 
-    public void btnModificarHandler(ActionEvent actionEvent) {
-        TipoReserva actualizado= dataBean.update(registro);
-        FacesMessage mensaje= new FacesMessage();
-        if(actualizado!=null){
-            this.registro =null;
-            this.estado=ESTADO_CRUD.MODIFICAR;
-            mensaje.setSeverity(FacesMessage.SEVERITY_INFO);
-            mensaje.setSummary("Registro modificado con exito");
-
-        }else {
-            mensaje.setSeverity(FacesMessage.SEVERITY_ERROR);
-            mensaje.setSummary("NO se pudo guardar el registro, revise datos");
-
-        }
-        facesContext.addMessage(null, mensaje);
+    @Override
+    protected Integer getId(TipoReserva entity) {
+        return entity.getIdTipoReserva();
     }
 
-    public ESTADO_CRUD getEstado() {
-        return estado;
+    @Override
+    protected TipoReserva createNewInstance() {
+        TipoReserva nuevo = new TipoReserva();
+        nuevo.setActivo(true);
+        nuevo.setIdTipoReserva(dataBean.obtenerMaxIdTipoReserva(nuevo) + 1);
+        return nuevo;
     }
 
-    public void setEstado(ESTADO_CRUD estado) {
-        this.estado = estado;
+    @Override
+    protected void save(TipoReserva entity) {
+        dataBean.create(entity);
+    }
+
+    @Override
+    protected TipoReserva update(TipoReserva entity) {
+        return dataBean.update(entity);
+    }
+
+    @Override
+    protected void delete(TipoReserva entity) {
+        dataBean.delete(entity.getIdTipoReserva());
     }
 }
