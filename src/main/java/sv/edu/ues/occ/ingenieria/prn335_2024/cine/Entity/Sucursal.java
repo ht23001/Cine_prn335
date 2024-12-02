@@ -9,24 +9,17 @@ import java.util.List;
 @Table(name = "sucursal")
 @NamedQueries({
         @NamedQuery(
-                name="Sucursal.IdMaximo",
-                query = "SELECT max(tp.idSucursal) FROM Sucursal tp")
+                name = "Sucursal.IdMaximo",
+                query = "SELECT max(tp.idSucursal) FROM Sucursal tp"
+        )
 })
 public class Sucursal {
     @Id
     @Column(name = "id_sucursal", nullable = false)
     private Integer idSucursal;
 
-    @OneToMany (fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "idSucursal")
-    public List<Sala> SalaList;
-
-    public List<Sala> getSalaList() {
-        return SalaList;
-    }
-
-    public void setSalaList(List<Sala> salaList) {
-        SalaList = salaList;
-    }
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "idSucursal")
+    private List<Sala> salaList;
 
     @Size(max = 155)
     @Column(name = "nombre", length = 155)
@@ -49,8 +42,16 @@ public class Sucursal {
         return idSucursal;
     }
 
-    public void setIdSucursal(Integer id) {
-        this.idSucursal = id;
+    public void setIdSucursal(Integer idSucursal) {
+        this.idSucursal = idSucursal;
+    }
+
+    public List<Sala> getSalaList() {
+        return salaList;
+    }
+
+    public void setSalaList(List<Sala> salaList) {
+        this.salaList = salaList;
     }
 
     public String getNombre() {
@@ -92,5 +93,4 @@ public class Sucursal {
     public void setActivo(Boolean activo) {
         this.activo = activo;
     }
-
 }

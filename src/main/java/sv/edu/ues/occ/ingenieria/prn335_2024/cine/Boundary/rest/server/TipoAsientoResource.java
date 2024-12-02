@@ -33,7 +33,7 @@ public class TipoAsientoResource implements Serializable {
         try {
             if(firstResult>=0 & maxResults>0 & maxResults<=50){
                 List<TipoAsiento> encontrados =  taBean.findRange(firstResult, maxResults);
-                long total= taBean.count();
+                long total= taBean.Count();
                 Response.ResponseBuilder builder = Response.ok(encontrados).header("Total-Elements",total)
                         .type(MediaType.APPLICATION_JSON); // Response.ok codigo 200 contiene el body
                 return builder.build(); // build devuelve response
@@ -80,7 +80,7 @@ public class TipoAsientoResource implements Serializable {
 
         if(tipoAsiento!=null & tipoAsiento.getIdTipoAsiento()==null){
             try{
-                taBean.create(tipoAsiento);
+                taBean.Create(tipoAsiento);
                 if(tipoAsiento.getIdTipoAsiento()!=null){
                     UriBuilder uriBuilder=uriInfo.getAbsolutePathBuilder();
                     uriBuilder.path(String.valueOf(tipoAsiento.getIdTipoAsiento()));

@@ -1,6 +1,7 @@
 package sv.edu.ues.occ.ingenieria.prn335_2024.cine.Entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
 @Entity
@@ -11,9 +12,10 @@ import jakarta.validation.constraints.Size;
                 query = "SELECT max (tr.idTipoReserva) FROM TipoReserva tr")
 })
 public class TipoReserva {
+    @Id
+    @Column(name = "id_tipo_reserva", nullable = false)
     private Integer idTipoReserva;
 
-<<<<<<< HEAD
 
     /*COMENTO ESTO  GENERA ERROR EN LOS REST
 
@@ -36,7 +38,6 @@ public class TipoReserva {
     @NotBlank
     @Size(max = 155, min = 3)
     @Column(name = "nombre", length = 155)
-
     private String nombre;
 
     private Boolean activo;

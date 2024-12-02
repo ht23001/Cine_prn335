@@ -27,7 +27,7 @@ public class TipoPeliculaResource implements Serializable{
 
             if(firstResult>=0 & maxResults>0 & maxResults<=50){
                 List<TipoPelicula> encontrados= tpBean.findRange(firstResult, maxResults);
-                long total= tpBean.count();
+                long total= tpBean.Count();
                 Response.ResponseBuilder builder= Response.ok(encontrados).
                         header("TOTAL-ELEMENTS",total)
                         .type(MediaType.APPLICATION_JSON);
@@ -79,7 +79,7 @@ public class TipoPeliculaResource implements Serializable{
          // si el objeto a crear esta god y no han pasado ningun ID (en la bd esta autoimcrement)
         if(tipoPelicula!=null & tipoPelicula.getIdTipoPelicula()==null){
             try {
-                tpBean.create(tipoPelicula);
+                tpBean.Create(tipoPelicula);
                 if(tipoPelicula.getIdTipoPelicula()!=null){
                     UriBuilder uriBuilder=uriInfo.getAbsolutePathBuilder();
                     uriBuilder.path(String.valueOf(tipoPelicula.getIdTipoPelicula()));

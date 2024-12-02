@@ -33,7 +33,7 @@ public class TipoProductoResource implements Serializable {
         try {
             if(firstResult>=0 & maxResults>0 & maxResults<=50){
                 List<TipoProducto> encontrados =  tpBean.findRange(firstResult, maxResults);
-                long total= tpBean.count();
+                long total= tpBean.Count();
                 Response.ResponseBuilder builder = Response.ok(encontrados).header("Total-Elements",total)
                         .type(MediaType.APPLICATION_JSON); // Response.ok codigo 200 contiene el body
                 return builder.build(); // build devuelve response
@@ -78,7 +78,7 @@ public class TipoProductoResource implements Serializable {
 
         if(tipoProducto!=null & tipoProducto.getIdTipoProducto()==null){
             try{
-                tpBean.create(tipoProducto);
+                tpBean.Create(tipoProducto);
                 if(tipoProducto.getIdTipoProducto()!=null){
                     UriBuilder uriBuilder=uriInfo.getAbsolutePathBuilder();
                     uriBuilder.path(String.valueOf(tipoProducto.getIdTipoProducto()));

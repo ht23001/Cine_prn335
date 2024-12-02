@@ -34,6 +34,10 @@ public class TipoSalaBean extends AbscractDataPersistence<TipoSala> implements S
         return em;
     }
 
+
+    // TODO ESTO ES DE REFACTORIZARLO, ESTOS METODOS DEBERIAN SER GENERALES EN LA CLASE ABSTRACTPERSITENCE
+
+
     /*
     public void create(TipoSala registro) {
         em.persist(registro);
@@ -53,7 +57,6 @@ public class TipoSalaBean extends AbscractDataPersistence<TipoSala> implements S
 
 
 
-    // TODO ESTO ES DE REFACTORIZARLO, ESTOS METODOS DEBERIAN SER GENERALES EN LA CLASE ABSTRACTPERSITENCE
 
 
     public Integer obtenerMaxIdTipoSala(TipoSala registro) { TypedQuery<Integer> query = em.createNamedQuery("TipoSala.IdMaximo", Integer.class); Integer maxId = query.getSingleResult(); return maxId; }

@@ -27,7 +27,7 @@ public class TipoReservaResource implements Serializable {
         try{
             if(firstResult>=0 & maxResults>0 & maxResults<=50){
                 List<TipoReserva> encontrados= trBean.findRange(firstResult, maxResults);
-                long total= trBean.count();
+                long total= trBean.Count();
                 Response.ResponseBuilder builder = Response.ok(encontrados).
                         header("TOTAL-ELEMENTS",total).type(MediaType.APPLICATION_JSON);
                 return builder.build();
@@ -72,7 +72,7 @@ public class TipoReservaResource implements Serializable {
 
         if(tipoReserva!=null & tipoReserva.getIdTipoReserva()==null){
             try{
-                trBean.create(tipoReserva);
+                trBean.Create(tipoReserva);
                 if(tipoReserva.getIdTipoReserva()!=null){
                     UriBuilder uriBuilder=uriInfo.getAbsolutePathBuilder();
                     uriBuilder.path(String.valueOf(tipoReserva.getIdTipoReserva()));

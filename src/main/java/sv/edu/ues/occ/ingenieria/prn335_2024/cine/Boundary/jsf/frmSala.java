@@ -73,7 +73,7 @@ public class frmSala implements Serializable {
             public int count(Map<String, FilterMeta> map) {
                 try {
 
-                    return (int) sBean.count();
+                    return (int) sBean.Count();
                 } catch (Exception e) {
                     e.printStackTrace();
                     ///TODO: Enviar mensaje de error de acceso
@@ -150,7 +150,7 @@ public class frmSala implements Serializable {
 
     public void btnGuardarHandler(ActionEvent actionEvent) {
         try {
-            this.sBean.create(registro);
+            this.sBean.Create(registro);
             this.registro =null;
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Registro guardado"));
         } catch (Exception e) {
@@ -163,7 +163,7 @@ public class frmSala implements Serializable {
 
     public void btnEliminarHandler(ActionEvent actionEvent){
         FacesMessage mensaje = new FacesMessage();
-        sBean.delete(registro.getIdSala());
+        sBean.Delete(registro.getIdSala());
         mensaje.setSeverity(FacesMessage.SEVERITY_INFO);
         mensaje.setSummary("Registro eliminado con exito");
         facesContext.addMessage(null, mensaje);
@@ -178,7 +178,7 @@ public class frmSala implements Serializable {
     }
 
     public void btnModificarHandler(ActionEvent actionEvent) {
-        Sala actualizado= sBean.update(registro);
+        Sala actualizado= sBean.Update(registro);
         FacesMessage mensaje= new FacesMessage();
         if(actualizado!=null){
             this.registro =null;

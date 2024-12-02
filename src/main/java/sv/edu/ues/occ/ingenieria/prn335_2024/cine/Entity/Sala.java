@@ -7,24 +7,23 @@ import jakarta.validation.constraints.Size;
 @Table(name = "sala", schema = "public")
 @NamedQueries({
         @NamedQuery(
-                name="Sala.findByIdTipoSala",
-                query = "SELECT s FROM SalaCaracteristica sc JOIN sc.idSala s WHERE  sc.idTipoSala.idTipoSala = :idTipoSala GROUP BY s.idSala ORDER BY s.nombre ASC "),
-
-                @NamedQuery(
-                        name="Sala.IdMaximo",
-                        query = "SELECT max (s.idSala) FROM Sala s"),
-
+                name = "Sala.findByIdTipoSala",
+                query = "SELECT s FROM SalaCaracteristica sc JOIN sc.idSala s WHERE sc.idTipoSala.idTipoSala = :idTipoSala GROUP BY s.idSala ORDER BY s.nombre ASC"
+        ),
+        @NamedQuery(
+                name = "Sala.IdMaximo",
+                query = "SELECT max(s.idSala) FROM Sala s"
+        )
 })
-
 public class Sala {
+
     @Id
     @Column(name = "id_sala", nullable = false)
     private Integer idSala;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_sucursal")
-    private sv.edu.ues.occ.ingenieria.prn335_2024.cine.Entity.Sucursal id;
-
+    @JoinColumn(name = "id_sucursal", referencedColumnName = "id_sucursal")
+    private Sucursal idSucursal;
 
     @Size(max = 155)
     @Column(name = "nombre", length = 155)
@@ -37,27 +36,26 @@ public class Sala {
     @Column(name = "observaciones")
     private String observaciones;
 
-    public Sala(){};
+    public Sala() {}
 
-    public Sala(int idSala){
-        this.idSala =idSala;
+    public Sala(int idSala) {
+        this.idSala = idSala;
     }
 
     public Integer getIdSala() {
         return idSala;
     }
 
-    public void setIdSala(Integer id) {
-        this.idSala = id;
+    public void setIdSala(Integer idSala) {
+        this.idSala = idSala;
     }
 
-
-    public int getIdSucursal() {
-        return idSucursal.getId();
+    public Sucursal getIdSucursal() {
+        return idSucursal;
     }
 
-    public void setId(sv.edu.ues.occ.ingenieria.prn335_2024.cine.Entity.Sucursal idSucursal) {
-        this.id = idSucursal;
+    public void setIdSucursal(Sucursal idSucursal) {
+        this.idSucursal = idSucursal;
     }
 
     public String getNombre() {
@@ -83,7 +81,6 @@ public class Sala {
     public void setObservaciones(String observaciones) {
         this.observaciones = observaciones;
     }
-
-
-
 }
+
+

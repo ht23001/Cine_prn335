@@ -29,10 +29,14 @@ public class SalaBean extends AbscractDataPersistence<Sala> implements Serializa
 
     @Override
     public EntityManager getEntityManager() {
-        return null;
+        return em;
     }
 
-    public List<Sala> findByTipoSala(Integer idTipoSala, int first, int max){
+
+   /*
+
+
+       public List<Sala> findByTipoSala(Integer idTipoSala, int first, int max){
 
         if(idTipoSala!=null && first>=0 && max>0){
             try{
@@ -49,7 +53,6 @@ public class SalaBean extends AbscractDataPersistence<Sala> implements Serializa
         }
         return Collections.emptyList();
     }
-
     public long count() {
         return em.createQuery("SELECT COUNT(t) FROM TipoSala t", Long.class).getSingleResult();
     }
@@ -61,18 +64,22 @@ public class SalaBean extends AbscractDataPersistence<Sala> implements Serializa
         return em.merge(registro);
     }
 
-    public Integer obtenerMaxIdSala(Sala registro) { TypedQuery<Integer> query = em.createNamedQuery("Sala.IdMaximo", Integer.class);
-        Integer maxId = query.getSingleResult(); return maxId;
-    }
-
-    public void delete(int idSala) {
+     public void delete(int idSala) {
         em.remove(em.find(Sala.class, idSala));
     }
-
 
     public List<Sala> findRange(int desde, int max) {
         return em.createQuery("SELECT t FROM Sala t", Sala.class) .setFirstResult(desde) .setMaxResults(max) .getResultList();
     }
+
+    */
+
+    public Integer obtenerMaxIdSala(Sala registro) { TypedQuery<Integer> query = em.createNamedQuery("Sala.IdMaximo", Integer.class);
+        Integer maxId = query.getSingleResult(); return maxId;
+    }
+
+
+
 
 
 

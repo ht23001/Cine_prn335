@@ -34,7 +34,7 @@ public class TipoPagoResource implements Serializable {
         try {
             if(firstResult>=0 & maxResults>0 & maxResults<=50){
                 List<TipoPago> encontrados =  tpBean.findRange(firstResult, maxResults);
-                long total= tpBean.count();
+                long total= tpBean.Count();
                 Response.ResponseBuilder builder = Response.ok(encontrados).header("Total-Elements",total)
                         .type(MediaType.APPLICATION_JSON); // Response.ok codigo 200 contiene el body
                 return builder.build(); // build devuelve response
@@ -81,7 +81,7 @@ public class TipoPagoResource implements Serializable {
 
         if(tipoPago!=null & tipoPago.getIdTipoPago()==null){
             try{
-                tpBean.create(tipoPago);
+                tpBean.Create(tipoPago);
                 if(tipoPago.getIdTipoPago()!=null){
                     UriBuilder uriBuilder=uriInfo.getAbsolutePathBuilder();
                     uriBuilder.path(String.valueOf(tipoPago.getIdTipoPago()));
