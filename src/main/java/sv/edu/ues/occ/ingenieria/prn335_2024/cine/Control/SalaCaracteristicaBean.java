@@ -4,10 +4,13 @@ import jakarta.ejb.LocalBean;
 import jakarta.ejb.Stateless;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
+import jakarta.persistence.TypedQuery;
 import sv.edu.ues.occ.ingenieria.prn335_2024.cine.Entity.ReservaDetalle;
+import sv.edu.ues.occ.ingenieria.prn335_2024.cine.Entity.Sala;
 import sv.edu.ues.occ.ingenieria.prn335_2024.cine.Entity.SalaCaracteristica;
 
 import java.io.Serializable;
+import java.util.List;
 
 
 @LocalBean
@@ -23,4 +26,13 @@ public class SalaCaracteristicaBean extends AbscractDataPersistence<SalaCaracter
     }
     @Override
     public EntityManager getEntityManager(){return em;}
+
+
+    public List<SalaCaracteristica> findBySala(Sala sala) {
+        TypedQuery<SalaCaracteristica> query = em.createQuery("SELECT sc FROM SalaCaracteristica sc WHERE sc.idSala = :sala", SalaCaracteristica.class);
+        query.setParameter("sala", sala);
+        return query.getResultList();
+    }
+
+
 }

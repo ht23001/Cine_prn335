@@ -79,6 +79,11 @@ public class SalaBean extends AbscractDataPersistence<Sala> implements Serializa
     }
 
 
+    public List<Sucursal> obtenerSucursales() {
+        // Lógica para obtener las sucursales, ya sea por consulta o desde algún repositorio
+        return em.createQuery("SELECT s FROM Sucursal s", Sucursal.class).getResultList();
+    }
+
 
 
 
