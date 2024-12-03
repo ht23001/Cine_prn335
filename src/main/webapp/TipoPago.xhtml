@@ -5,6 +5,7 @@
                xmlns:c="jakarta.faces.core"
                xmlns:p="primefaces"
                xmlns:f="jakarta.faces.facelets"
+               xmlns:crud="jakarta.faces.composite/crud"
                template="WEB-INF/templates/principal.xhtml"
 >
 
@@ -67,27 +68,7 @@
                                 </h:panelGrid>
                                 <p:messages showSummary="true" showDetail="true"/>
                                 <h:panelGrid columns="4">
-                                    <p:commandButton value="Guardar" ajax="true"
-                                                     process="@form"
-                                                     rendered="#{frmTipoPago.estado=='CREAR'}"
-                                                     update=":pnlDetalle :pnlTabla"
-                                                     actionListener="#{frmTipoPago.btnGuardarHandler}"/>
-                                    <p:commandButton ajax="true"
-                                                     actionListener="#{frmTipoPago.btnCancelarHandler}"
-                                                     value="Cancelar"
-                                                     process="@this" update=":pnlDetalle :pnlTabla"
-                                                     rendered="true"
-                                    />
-                                    <p:commandButton value="Modificar" ajax="true"
-                                                     process="@form"
-                                                     update=":pnlDetalle :pnlTabla"
-                                                     rendered="#{frmTipoPago.estado!='CREAR'}"
-                                                     actionListener="#{frmTipoPago.btnModificarHandler}"/>
-                                    <p:commandButton value="Eliminar" ajax="true"
-                                                     process="@form"
-                                                     update=":pnlDetalle :pnlTabla"
-                                                     rendered="#{frmTipoPago.estado!='CREAR'}"
-                                                     actionListener="#{frmTipoPago.btnEliminarHandler}"/>
+                                    <crud:botonesTop frm="#{frmTipoPago}"/>
                                 </h:panelGrid>
                             </h:panelGrid>
                         </h:form>

@@ -5,6 +5,7 @@
       xmlns:c="jakarta.faces.core"
       xmlns:p="primefaces"
       xmlns:f="jakarta.faces.facelets"
+               xmlns:crud="jakarta.faces.composite/crud"
                template="WEB-INF/templates/principal.xhtml"
 >
 
@@ -72,27 +73,7 @@
                             </h:panelGrid>
                             <p:messages showSummary="true" showDetail="true"/>
                             <h:panelGrid columns="4">
-                                <p:commandButton value="Guardar" ajax="true"
-                                                 process="@form"
-                                                 rendered="#{frmTipoReserva.estado=='CREAR'}"
-                                                 update=":pnlDetalle :pnlTabla"
-                                                 actionListener="#{frmTipoReserva.btnGuardarHandler}"/>
-                                <p:commandButton ajax="true"
-                                                 actionListener="#{frmTipoReserva.btnCancelarHandler}"
-                                                 value="Cancelar"
-                                                 process="@this" update=":pnlDetalle :pnlTabla"
-                                                 rendered="true"
-                                />
-                                <p:commandButton value="Modificar" ajax="true"
-                                                 process="@form"
-                                                 update=":pnlDetalle :pnlTabla"
-                                                 rendered="#{frmTipoReserva.estado!='CREAR'}"
-                                                 actionListener="#{frmTipoReserva.btnModificarHandler}"/>
-                                <p:commandButton value="Eliminar" ajax="true"
-                                                 process="@form"
-                                                 update=":pnlDetalle :pnlTabla"
-                                                 rendered="#{frmTipoReserva.estado!='CREAR'}"
-                                                 actionListener="#{frmTipoReserva.btnEliminarHandler}"/>
+                                <crud:botonesTop frm="#{frmTipoReserva}"/>
                             </h:panelGrid>
                         </h:panelGrid>
                     </h:form>
