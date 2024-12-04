@@ -22,28 +22,32 @@ xmlns:p="primefaces"
                       default=":pnlDetalle :pnlTabla"
                       required="false"
                       displayName="Componetes a actualizar"
-                      shortDescription="Define el area a refrescar por el componente"
-        />
+                      shortDescription="Define el area a refrescar por el componente"/>
+        <cc:attribute name="showDialog"
+                      required="false"
+                      displayName="Show Dialog"
+                      shortDescription="Determina si el botón Nuevo debe mostrar un diálogo"
+                      default="true"/>
     </cc:interface>
 
     <cc:implementation>
         <h:panelGrid columns="4">
-            <p:commandButton value="Guardar" ajax="true"
+            <p:commandButton value="#{abstractpffrm['abstractpffrm.save']}" ajax="true"
                              process="@form"
                              rendered="#{cc.attrs.frm.estado == 'CREAR'}"
                              update="#{cc.attrs.actualizar}"
                              actionListener="#{cc.attrs.frm.btnGuardarHandler}"/>
             <p:commandButton ajax="true"
                              actionListener="#{cc.attrs.frm.btnCancelarHandler}"
-                             value="Cancelar"
+                             value="#{abstractpffrm['abstractpffrm.cancel']}"
                              process="@this" update="#{cc.attrs.actualizar}"
                              rendered="true"/>
-            <p:commandButton value="Modificar" ajax="true"
+            <p:commandButton value="#{abstractpffrm['abstractpffrm.update']}" ajax="true"
                              process="@form"
                              update="#{cc.attrs.actualizar}"
                              rendered="#{cc.attrs.frm.estado != 'CREAR'}"
                              actionListener="#{cc.attrs.frm.btnModificarHandler}"/>
-            <p:commandButton value="Eliminar" ajax="true"
+            <p:commandButton value="#{abstractpffrm['abstractpffrm.delete']}" ajax="true"
                              process="@form"
                              update="#{cc.attrs.actualizar}"
                              rendered="#{cc.attrs.frm.estado != 'CREAR'}"

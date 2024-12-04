@@ -52,16 +52,12 @@
 
                     <p:growl life="5000"/>
                     <h:panelGrid columns="#{frmTipoPelicula.estado!='NINGUNO'?'2':'1'}">
-                        <p:commandButton ajax="true"
-                                         actionListener="#{frmTipoPelicula.btnNuevoHandler}"
-                                         value="Nuevo"
-                                         process="@this" update=":pnlDetalle :pnlTabla"
-                                         oncomplete="PF('customerDialog').show()"/>
+                        <crud:nuevoBoton frm="#{frmTipoPelicula}"/>
                     </h:panelGrid>
                 </h:form>
                 <h:panelGroup id="pnlDetalle" >
                     <p:dialog header="Tipo Pelicula" widgetVar="customerDialog" modal="true"
-                              showEffect="fade" hideEffect="fade" resizable="false" id="dlgDetalle">
+                              showEffect="fade" hideEffect="fade" resizable="false" id="dlgDetalle" closable="false">
                         <h:form id="frmDetalle" >
                             <h:panelGrid>
                                 <h:panelGrid columns="2">

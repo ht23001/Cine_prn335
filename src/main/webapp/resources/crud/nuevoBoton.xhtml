@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:component
+        xmlns:ui="jakarta.faces.facelets"
+        xmlns:cc="jakarta.faces.composite"
+        xmlns:h="jakarta.faces.html"
+        xmlns:p="primefaces">
+    <cc:interface>
+        <cc:attribute name="frm"
+                      type="sv.edu.ues.occ.ingenieria.prn335_2024.cine.Boundary.jsf.AbstractPfFrm"
+                      required="true"
+                      displayName="Formulario"
+                      shortDescription="Formulario sobre el que se opera"/>
+        <cc:attribute name="actualizar"
+                      default=":pnlDetalle :pnlTabla"
+                      required="false"
+                      displayName="Componentes a actualizar"
+                      shortDescription="Define el área a refrescar por el componente"/>
+        <cc:attribute name="showDialog"
+                      required="false"
+                      displayName="Show Dialog"
+                      shortDescription="Determina si el botón Nuevo debe mostrar un diálogo"
+                      default="true"/>
+    </cc:interface>
+
+    <cc:implementation>
+        <p:commandButton value="#{abstractpffrm['abstractpffrm.new']}" ajax="true"
+                         actionListener="#{cc.attrs.frm.btnNuevoHandler}"
+                         process="@this" update="#{cc.attrs.actualizar}"
+                         oncomplete="#{cc.attrs.showDialog ? 'PF(\'customerDialog\').show()' : ''}"/>
+    </cc:implementation>
+</ui:component>
