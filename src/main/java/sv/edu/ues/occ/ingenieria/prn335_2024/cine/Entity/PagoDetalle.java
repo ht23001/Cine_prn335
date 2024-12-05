@@ -9,25 +9,25 @@ import java.math.BigDecimal;
 public class PagoDetalle {
     @Id
     @Column(name = "id_pago_detalle", nullable = false)
-    private Long id;
+    private Long idPagoDetalle;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_pago")
     private Pago idPago;
 
     @Column(name = "monto", precision = 10, scale = 2)
-    private BigDecimal monto;
+    private BigDecimal montoPagoDetalle;
 
     @Lob
     @Column(name = "concepto")
-    private String concepto;
+    private String conceptoPagoDetalle;
 
-    public Long getId() {
-        return id;
+    public Long getIdPagoDetalle() {
+        return idPagoDetalle;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setIdPagoDetalle(Long id) {
+        this.idPagoDetalle = id;
     }
 
     public Pago getIdPago() {
@@ -38,20 +38,20 @@ public class PagoDetalle {
         this.idPago = idPago;
     }
 
-    public BigDecimal getMonto() {
-        return monto;
+    public BigDecimal getMontoPagoDetalle() {
+        return montoPagoDetalle;
     }
 
-    public void setMonto(BigDecimal monto) {
-        this.monto = monto;
+    public void setMontoPagoDetalle(BigDecimal monto) {
+        this.montoPagoDetalle = monto;
     }
 
-    public String getConcepto() {
-        return concepto;
+    public String getConceptoPagoDetalle() {
+        return conceptoPagoDetalle;
     }
 
-    public void setConcepto(String concepto) {
-        this.concepto = concepto;
+    public void setConceptoPagoDetalle(String concepto) {
+        this.conceptoPagoDetalle = concepto;
     }
 
 }

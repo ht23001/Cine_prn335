@@ -46,13 +46,16 @@ public class Sucursal {
         this.idSucursal = idSucursal;
     }
 
-    public List<Sala> getSalaList() {
+    /*  problemas con rest
+     public List<Sala> getSalaList() {
         return salaList;
     }
 
     public void setSalaList(List<Sala> salaList) {
         this.salaList = salaList;
     }
+     */
+
 
     public String getNombre() {
         return nombre;

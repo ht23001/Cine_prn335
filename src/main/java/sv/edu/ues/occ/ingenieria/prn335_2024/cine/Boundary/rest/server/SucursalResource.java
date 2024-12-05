@@ -3,21 +3,22 @@ package sv.edu.ues.occ.ingenieria.prn335_2024.cine.Boundary.rest.server;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.*;
+import sv.edu.ues.occ.ingenieria.prn335_2024.cine.Entity.Sucursal;
+import sv.edu.ues.occ.ingenieria.prn335_2024.cine.Control.SucursalBean;
+import sv.edu.ues.occ.ingenieria.prn335_2024.cine.Entity.TipoAsiento;
 
-import sv.edu.ues.occ.ingenieria.prn335_2024.cine.Control.TipoPagoBean;
-import sv.edu.ues.occ.ingenieria.prn335_2024.cine.Entity.TipoPago;
-import sv.edu.ues.occ.ingenieria.prn335_2024.cine.Entity.TipoPelicula;
 
 import java.io.Serializable;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-@Path("tipopago")
-public class TipoPagoResource implements Serializable {
+@Path("sucursal")
+public class SucursalResource implements Serializable {
 
     @Inject
-    TipoPagoBean tpBean;
+    SucursalBean sBean;
+
 
     @GET
     @Produces({MediaType.APPLICATION_JSON})
@@ -33,8 +34,8 @@ public class TipoPagoResource implements Serializable {
 
         try {
             if(firstResult>=0 & maxResults>0 & maxResults<=50){
-                List<TipoPago> encontrados =  tpBean.findRange(firstResult, maxResults);
-                long total= tpBean.Count();
+                List<Sucursal> encontrados =  sBean.findRange(firstResult, maxResults);
+                long total= sBean.Count();
                 Response.ResponseBuilder builder = Response.ok(encontrados).header("Total-Elements",total)
                         .type(MediaType.APPLICATION_JSON); // Response.ok codigo 200 contiene el body
                 return builder.build(); // build devuelve response
@@ -57,12 +58,12 @@ public class TipoPagoResource implements Serializable {
     public Response findById(@PathParam("id") Integer id){
         if(id!=null){
             try{
-                TipoPago encontrado= tpBean.findById(id);
+                Sucursal encontrado= sBean.findById(id);
                 if(encontrado!=null){
                     Response.ResponseBuilder builder= Response.ok(encontrado).type(MediaType.APPLICATION_JSON);
                     return builder.build();
                 }
-                // si el tipo sala es null, no se encontro
+                // si el tipo asiento es null, no se encontro
 
                 return Response.status(404).header("NOT-FOUND", "ID:"+id).build();
 
@@ -77,14 +78,14 @@ public class TipoPagoResource implements Serializable {
     @POST
     @Produces({MediaType.APPLICATION_JSON})
     @Consumes({MediaType.APPLICATION_JSON})
-    public Response create(TipoPago tipoPago, @Context UriInfo uriInfo){
+    public Response create(Sucursal sucursal, @Context UriInfo uriInfo){
 
-        if(tipoPago!=null & tipoPago.getIdTipoPago()==null){
+        if(sucursal!=null & sucursal.getIdSucursal()==null){
             try{
-                tpBean.Create(tipoPago);
-                if(tipoPago.getIdTipoPago()!=null){
+                sBean.Create(sucursal);
+                if(sucursal.getIdSucursal()!=null){
                     UriBuilder uriBuilder=uriInfo.getAbsolutePathBuilder();
-                    uriBuilder.path(String.valueOf(tipoPago.getIdTipoPago()));
+                    uriBuilder.path(String.valueOf(sucursal.getIdSucursal()));
                     return Response.created(uriBuilder.build()).build();
 
                 }
@@ -97,34 +98,33 @@ public class TipoPagoResource implements Serializable {
 
         }
 
-        return Response.status(422).header("WRONG - PARAMETER", "TipoPago"+tipoPago ).build();
+        return Response.status(422).header("WRONG - PARAMETER", "Sucursal"+sucursal ).build();
     }
 
     @PUT
     @Path("/{id}")
     @Produces({MediaType.APPLICATION_JSON})
     @Consumes({MediaType.APPLICATION_JSON})
-    public Response update(@PathParam("id") Integer id, TipoPago tipoPago) {
-        if (id != null && tipoPago != null && tipoPago.getIdTipoPago().equals(id)) {
+    public Response update(@PathParam("id") Integer id, Sucursal sucursal) {
+        if (id != null && sucursal != null && sucursal.getIdSucursal().equals(id)) {
             try {
-                tpBean.Update(tipoPago);
-                return Response.ok(tipoPago).build();
+                sBean.Update(sucursal);
+                return Response.ok(sucursal).build();
             } catch (Exception e) {
                 Logger.getLogger(getClass().getName()).log(Level.SEVERE, e.getMessage(), e);
                 return Response.status(500).entity(e.getMessage()).build();
             }
         }
-        return Response.status(422).header("WRONG - PARAMETER", "ID:" + id + ", TipoPelicula: " + tipoPago).build();
+        return Response.status(422).header("WRONG - PARAMETER", "ID:" + id + ", Sucursal: " + sucursal).build();
     }
 
 
 
-    @DELETE
     @Path("/{id}")
     public Response delete(@PathParam("id") Integer id) {
         if (id != null) {
             try {
-                tpBean.Delete(id);
+                sBean.Delete(id);
                 return Response.noContent().build();
             } catch (Exception e) {
                 Logger.getLogger(getClass().getName()).log(Level.SEVERE, e.getMessage(), e);
@@ -133,6 +133,9 @@ public class TipoPagoResource implements Serializable {
         }
         return Response.status(422).header("WRONG - PARAMETER", "ID:" + id).build();
     }
+
+
+
 
 
 }

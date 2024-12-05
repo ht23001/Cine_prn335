@@ -10,7 +10,6 @@ import sv.edu.ues.occ.ingenieria.prn335_2024.cine.Entity.TipoReserva;
 
 
 import java.io.Serializable;
-import java.util.List;
 
 @Stateless
 @LocalBean

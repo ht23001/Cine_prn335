@@ -9,7 +9,7 @@ import java.time.OffsetDateTime;
 public class Pago {
     @Id
     @Column(name = "id_pago", nullable = false)
-    private Long id;
+    private Long idPago;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_factura")
@@ -20,14 +20,14 @@ public class Pago {
     private sv.edu.ues.occ.ingenieria.prn335_2024.cine.Entity.TipoPago idTipoPago;
 
     @Column(name = "fecha")
-    private OffsetDateTime fecha;
+    private OffsetDateTime fechaPago;
 
-    public Long getId() {
-        return id;
+    public Long getIdPago() {
+        return idPago;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setIdPago(Long id) {
+        this.idPago = id;
     }
 
     public Factura getIdFactura() {
@@ -46,12 +46,12 @@ public class Pago {
         this.idTipoPago = idTipoPago;
     }
 
-    public OffsetDateTime getFecha() {
-        return fecha;
+    public OffsetDateTime getFechaPago() {
+        return fechaPago;
     }
 
-    public void setFecha(OffsetDateTime fecha) {
-        this.fecha = fecha;
+    public void setFechaPago(OffsetDateTime fecha) {
+        this.fechaPago = fecha;
     }
 
 }

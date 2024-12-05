@@ -9,7 +9,7 @@ import java.time.OffsetDateTime;
 public class Programacion {
     @Id
     @Column(name = "id_programacion", nullable = false)
-    private Long id;
+    private Long idProgramacion;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_sala")
@@ -20,21 +20,21 @@ public class Programacion {
     private Pelicula idPelicula;
 
     @Column(name = "desde")
-    private OffsetDateTime desde;
+    private OffsetDateTime desdeProgramacion;
 
     @Column(name = "hasta")
-    private OffsetDateTime hasta;
+    private OffsetDateTime hastaProgramacion;
 
     @Lob
     @Column(name = "comentarios")
-    private String comentarios;
+    private String comentariosProgramacion;
 
-    public Long getId() {
-        return id;
+    public Long getIdProgramacion() {
+        return idProgramacion;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setIdProgramacion(Long id) {
+        this.idProgramacion = id;
     }
 
     public sv.edu.ues.occ.ingenieria.prn335_2024.cine.Entity.Sala getIdSala() {
@@ -53,28 +53,28 @@ public class Programacion {
         this.idPelicula = idPelicula;
     }
 
-    public OffsetDateTime getDesde() {
-        return desde;
+    public OffsetDateTime getDesdeProgramacion() {
+        return desdeProgramacion;
     }
 
-    public void setDesde(OffsetDateTime desde) {
-        this.desde = desde;
+    public void setDesdeProgramacion(OffsetDateTime desde) {
+        this.desdeProgramacion = desde;
     }
 
-    public OffsetDateTime getHasta() {
-        return hasta;
+    public OffsetDateTime getHastaProgramacion() {
+        return hastaProgramacion;
     }
 
-    public void setHasta(OffsetDateTime hasta) {
-        this.hasta = hasta;
+    public void setHastaProgramacion(OffsetDateTime hasta) {
+        this.hastaProgramacion = hasta;
     }
 
-    public String getComentarios() {
-        return comentarios;
+    public String getComentariosProgramacion() {
+        return comentariosProgramacion;
     }
 
-    public void setComentarios(String comentarios) {
-        this.comentarios = comentarios;
+    public void setComentariosProgramacion(String comentarios) {
+        this.comentariosProgramacion = comentarios;
     }
 
 }

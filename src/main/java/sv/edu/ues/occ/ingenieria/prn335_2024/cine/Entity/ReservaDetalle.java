@@ -8,7 +8,7 @@ import jakarta.validation.constraints.Size;
 public class ReservaDetalle {
     @Id
     @Column(name = "id_reserva_detalle", nullable = false)
-    private Long id;
+    private Long idReservaDetalle;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_reserva")
@@ -20,14 +20,14 @@ public class ReservaDetalle {
 
     @Size(max = 155)
     @Column(name = "estado", length = 155)
-    private String estado;
+    private String estadoReservaDetalle;
 
-    public Long getId() {
-        return id;
+    public Long getIdReservaDetalle() {
+        return idReservaDetalle;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setIdReservaDetalle(Long id) {
+        this.idReservaDetalle = id;
     }
 
     public Reserva getIdReserva() {
@@ -46,12 +46,12 @@ public class ReservaDetalle {
         this.idAsiento = idAsiento;
     }
 
-    public String getEstado() {
-        return estado;
+    public String getEstadoReservaDetalle() {
+        return estadoReservaDetalle;
     }
 
-    public void setEstado(String estado) {
-        this.estado = estado;
+    public void setEstadoReservaDetalle(String estado) {
+        this.estadoReservaDetalle = estado;
     }
 
 }

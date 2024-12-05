@@ -30,23 +30,31 @@ public class SucursalBean  extends AbscractDataPersistence<Sucursal> implements 
         return maxId;
     }
 
-    public void create(Sucursal registro) {
-        em.persist(registro);
-    }
-
-    public long count() { return em.createQuery("SELECT COUNT(su) FROM Sucursal su", Long.class).getSingleResult(); }
+    /*
 
     public List<Sucursal> findRange(int desde, int max) { return em.createQuery("SELECT su FROM Sucursal su", Sucursal.class) .setFirstResult(desde) .setMaxResults(max) .getResultList(); }
 
-    public Sucursal update(Sucursal registro){
+
+       public void create(Sucursal registro) {
+        em.persist(registro);
+    }
+
+     public Sucursal update(Sucursal registro){
 
         return em.merge(registro);
     }
+     public long count() { return em.createQuery("SELECT COUNT(su) FROM Sucursal su", Long.class).getSingleResult(); }
+
+     */
+
+
+
+
+
+
 
     public List<Sucursal> findAll() { return em.createQuery("SELECT su FROM Sucursal su", Sucursal.class).getResultList(); }
 
-    public void delete(int idSucursal) {
-        em.remove(em.find(Sucursal.class, idSucursal));
-    }
+
 
 }

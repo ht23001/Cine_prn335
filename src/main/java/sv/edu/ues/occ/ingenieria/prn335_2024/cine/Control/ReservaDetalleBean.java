@@ -17,6 +17,10 @@ public class ReservaDetalleBean extends AbscractDataPersistence<ReservaDetalle> 
     }
     @Override
     public EntityManager getEntityManager(){return em;}
+
+
+
+
 }
 
 

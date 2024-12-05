@@ -6,6 +6,7 @@ import jakarta.ws.rs.core.*;
 import sv.edu.ues.occ.ingenieria.prn335_2024.cine.Control.TipoAsientoBean;
 
 import sv.edu.ues.occ.ingenieria.prn335_2024.cine.Entity.TipoAsiento;
+import sv.edu.ues.occ.ingenieria.prn335_2024.cine.Entity.TipoPago;
 
 import java.io.Serializable;
 import java.util.List;
@@ -97,6 +98,41 @@ public class TipoAsientoResource implements Serializable {
         }
 
         return Response.status(422).header("WRONG - PARAMETER", "TipoAsiento"+tipoAsiento ).build();
+    }
+
+
+    @PUT
+    @Path("/{id}")
+    @Produces({MediaType.APPLICATION_JSON})
+    @Consumes({MediaType.APPLICATION_JSON})
+    public Response update(@PathParam("id") Integer id, TipoAsiento tipoAsiento) {
+        if (id != null && tipoAsiento != null && tipoAsiento.getIdTipoAsiento().equals(id)) {
+            try {
+                taBean.Update(tipoAsiento);
+                return Response.ok(tipoAsiento).build();
+            } catch (Exception e) {
+                Logger.getLogger(getClass().getName()).log(Level.SEVERE, e.getMessage(), e);
+                return Response.status(500).entity(e.getMessage()).build();
+            }
+        }
+        return Response.status(422).header("WRONG - PARAMETER", "ID:" + id + ", TipoAsiento: " + tipoAsiento).build();
+    }
+
+
+
+    @DELETE
+    @Path("/{id}")
+    public Response delete(@PathParam("id") Integer id) {
+        if (id != null) {
+            try {
+                taBean.Delete(id);
+                return Response.noContent().build();
+            } catch (Exception e) {
+                Logger.getLogger(getClass().getName()).log(Level.SEVERE, e.getMessage(), e);
+                return Response.status(500).entity(e.getMessage()).build();
+            }
+        }
+        return Response.status(422).header("WRONG - PARAMETER", "ID:" + id).build();
     }
 
 

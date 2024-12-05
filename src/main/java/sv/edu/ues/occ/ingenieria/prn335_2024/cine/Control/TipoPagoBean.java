@@ -6,10 +6,8 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.TypedQuery;
 import sv.edu.ues.occ.ingenieria.prn335_2024.cine.Entity.TipoPago;
-import sv.edu.ues.occ.ingenieria.prn335_2024.cine.Entity.TipoReserva;
 
 import java.io.Serializable;
-import java.util.List;
 
 @LocalBean
 @Stateless

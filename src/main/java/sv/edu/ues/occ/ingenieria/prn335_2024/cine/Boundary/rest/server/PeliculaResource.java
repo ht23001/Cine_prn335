@@ -3,21 +3,20 @@ package sv.edu.ues.occ.ingenieria.prn335_2024.cine.Boundary.rest.server;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.*;
-
-import sv.edu.ues.occ.ingenieria.prn335_2024.cine.Control.TipoPagoBean;
-import sv.edu.ues.occ.ingenieria.prn335_2024.cine.Entity.TipoPago;
-import sv.edu.ues.occ.ingenieria.prn335_2024.cine.Entity.TipoPelicula;
+import sv.edu.ues.occ.ingenieria.prn335_2024.cine.Control.PeliculaBean;
+import sv.edu.ues.occ.ingenieria.prn335_2024.cine.Entity.Pelicula;
 
 import java.io.Serializable;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-@Path("tipopago")
-public class TipoPagoResource implements Serializable {
+@Path("pelicula")
+public class PeliculaResource implements Serializable {
 
     @Inject
-    TipoPagoBean tpBean;
+    PeliculaBean pBean;
+
 
     @GET
     @Produces({MediaType.APPLICATION_JSON})
@@ -33,8 +32,8 @@ public class TipoPagoResource implements Serializable {
 
         try {
             if(firstResult>=0 & maxResults>0 & maxResults<=50){
-                List<TipoPago> encontrados =  tpBean.findRange(firstResult, maxResults);
-                long total= tpBean.Count();
+                List<Pelicula> encontrados =  pBean.findRange(firstResult, maxResults);
+                long total= pBean.Count();
                 Response.ResponseBuilder builder = Response.ok(encontrados).header("Total-Elements",total)
                         .type(MediaType.APPLICATION_JSON); // Response.ok codigo 200 contiene el body
                 return builder.build(); // build devuelve response
@@ -57,12 +56,12 @@ public class TipoPagoResource implements Serializable {
     public Response findById(@PathParam("id") Integer id){
         if(id!=null){
             try{
-                TipoPago encontrado= tpBean.findById(id);
+                Pelicula encontrado= pBean.findById(id);
                 if(encontrado!=null){
                     Response.ResponseBuilder builder= Response.ok(encontrado).type(MediaType.APPLICATION_JSON);
                     return builder.build();
                 }
-                // si el tipo sala es null, no se encontro
+                // si el tipo asiento es null, no se encontro
 
                 return Response.status(404).header("NOT-FOUND", "ID:"+id).build();
 
@@ -77,14 +76,14 @@ public class TipoPagoResource implements Serializable {
     @POST
     @Produces({MediaType.APPLICATION_JSON})
     @Consumes({MediaType.APPLICATION_JSON})
-    public Response create(TipoPago tipoPago, @Context UriInfo uriInfo){
+    public Response create(Pelicula pelicula, @Context UriInfo uriInfo){
 
-        if(tipoPago!=null & tipoPago.getIdTipoPago()==null){
+        if(pelicula!=null & pelicula.getIdPelicula()==null){
             try{
-                tpBean.Create(tipoPago);
-                if(tipoPago.getIdTipoPago()!=null){
+                pBean.Create(pelicula);
+                if(pelicula.getIdPelicula()!=null){
                     UriBuilder uriBuilder=uriInfo.getAbsolutePathBuilder();
-                    uriBuilder.path(String.valueOf(tipoPago.getIdTipoPago()));
+                    uriBuilder.path(String.valueOf(pelicula.getIdPelicula()));
                     return Response.created(uriBuilder.build()).build();
 
                 }
@@ -97,42 +96,6 @@ public class TipoPagoResource implements Serializable {
 
         }
 
-        return Response.status(422).header("WRONG - PARAMETER", "TipoPago"+tipoPago ).build();
+        return Response.status(422).header("WRONG - PARAMETER", "Pelicula"+pelicula ).build();
     }
-
-    @PUT
-    @Path("/{id}")
-    @Produces({MediaType.APPLICATION_JSON})
-    @Consumes({MediaType.APPLICATION_JSON})
-    public Response update(@PathParam("id") Integer id, TipoPago tipoPago) {
-        if (id != null && tipoPago != null && tipoPago.getIdTipoPago().equals(id)) {
-            try {
-                tpBean.Update(tipoPago);
-                return Response.ok(tipoPago).build();
-            } catch (Exception e) {
-                Logger.getLogger(getClass().getName()).log(Level.SEVERE, e.getMessage(), e);
-                return Response.status(500).entity(e.getMessage()).build();
-            }
-        }
-        return Response.status(422).header("WRONG - PARAMETER", "ID:" + id + ", TipoPelicula: " + tipoPago).build();
-    }
-
-
-
-    @DELETE
-    @Path("/{id}")
-    public Response delete(@PathParam("id") Integer id) {
-        if (id != null) {
-            try {
-                tpBean.Delete(id);
-                return Response.noContent().build();
-            } catch (Exception e) {
-                Logger.getLogger(getClass().getName()).log(Level.SEVERE, e.getMessage(), e);
-                return Response.status(500).entity(e.getMessage()).build();
-            }
-        }
-        return Response.status(422).header("WRONG - PARAMETER", "ID:" + id).build();
-    }
-
-
 }

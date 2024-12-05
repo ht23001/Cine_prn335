@@ -17,8 +17,6 @@ public class TipoSalaResource implements Serializable {
     @Inject
     TipoSalaBean tsBean;
 
-
-
     @GET
     @Produces({MediaType.APPLICATION_JSON})
     public Response findRange(

@@ -24,6 +24,8 @@ public class frmSala extends AbstractPfFrm<Sala> implements Serializable {
     @Inject
     SalaCaracteristicaBean scBean;
 
+
+
     private List<SalaCaracteristica> salaCaracteristicas;  // Lista de características de la sala seleccionada
 
     @PostConstruct

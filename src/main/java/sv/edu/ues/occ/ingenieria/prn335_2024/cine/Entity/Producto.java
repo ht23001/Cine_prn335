@@ -8,7 +8,7 @@ import jakarta.validation.constraints.Size;
 public class Producto {
     @Id
     @Column(name = "id_producto", nullable = false)
-    private Long id;
+    private Long idProducto;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_tipo_producto")
@@ -16,21 +16,21 @@ public class Producto {
 
     @Size(max = 155)
     @Column(name = "nombre", length = 155)
-    private String nombre;
+    private String nombreProducto;
 
     @Column(name = "activo")
-    private Boolean activo;
+    private Boolean activoProducto;
 
     @Lob
     @Column(name = "descripcion")
-    private String descripcion;
+    private String descripcionProducto;
 
-    public Long getId() {
-        return id;
+    public Long getIdProducto() {
+        return idProducto;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setIdProducto(Long id) {
+        this.idProducto = id;
     }
 
     public sv.edu.ues.occ.ingenieria.prn335_2024.cine.Entity.TipoProducto getIdTipoProducto() {
@@ -41,28 +41,28 @@ public class Producto {
         this.idTipoProducto = idTipoProducto;
     }
 
-    public String getNombre() {
-        return nombre;
+    public String getNombreProducto() {
+        return nombreProducto;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setNombreProducto(String nombre) {
+        this.nombreProducto = nombre;
     }
 
-    public Boolean getActivo() {
-        return activo;
+    public Boolean getActivoProducto() {
+        return activoProducto;
     }
 
-    public void setActivo(Boolean activo) {
-        this.activo = activo;
+    public void setActivoProducto(Boolean activo) {
+        this.activoProducto = activo;
     }
 
-    public String getDescripcion() {
-        return descripcion;
+    public String getDescripcionProducto() {
+        return descripcionProducto;
     }
 
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
+    public void setDescripcionProducto(String descripcion) {
+        this.descripcionProducto = descripcion;
     }
 
 }

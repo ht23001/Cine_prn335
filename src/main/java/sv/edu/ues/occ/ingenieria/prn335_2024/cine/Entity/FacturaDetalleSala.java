@@ -9,7 +9,7 @@ import java.math.BigDecimal;
 public class FacturaDetalleSala {
     @Id
     @Column(name = "id_factura_detalle_sala", nullable = false)
-    private Long id;
+    private Long idFacturaDetalleSala;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_factura")
@@ -20,14 +20,14 @@ public class FacturaDetalleSala {
     private sv.edu.ues.occ.ingenieria.prn335_2024.cine.Entity.ReservaDetalle idReservaDetalle;
 
     @Column(name = "monto", precision = 10, scale = 2)
-    private BigDecimal monto;
+    private BigDecimal montoFacturaDetalleSala;
 
-    public Long getId() {
-        return id;
+    public Long getIdFacturaDetalleSala() {
+        return idFacturaDetalleSala;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setIdFacturaDetalleSala(Long id) {
+        this.idFacturaDetalleSala = id;
     }
 
     public Factura getIdFactura() {
@@ -46,12 +46,12 @@ public class FacturaDetalleSala {
         this.idReservaDetalle = idReservaDetalle;
     }
 
-    public BigDecimal getMonto() {
-        return monto;
+    public BigDecimal getMontoFacturaDetalleSala() {
+        return montoFacturaDetalleSala;
     }
 
-    public void setMonto(BigDecimal monto) {
-        this.monto = monto;
+    public void setMontoFacturaDetalleSala(BigDecimal monto) {
+        this.montoFacturaDetalleSala = monto;
     }
 
 }

@@ -12,10 +12,8 @@ import org.primefaces.model.FilterMeta;
 import org.primefaces.model.LazyDataModel;
 import org.primefaces.model.SortMeta;
 import sv.edu.ues.occ.ingenieria.prn335_2024.cine.Control.PeliculaBean;
+import sv.edu.ues.occ.ingenieria.prn335_2024.cine.Control.Sucursal;
 import sv.edu.ues.occ.ingenieria.prn335_2024.cine.Entity.Pelicula;
-import sv.edu.ues.occ.ingenieria.prn335_2024.cine.Entity.TipoAsiento;
-import sv.edu.ues.occ.ingenieria.prn335_2024.cine.Entity.TipoPago;
-import sv.edu.ues.occ.ingenieria.prn335_2024.cine.Entity.TipoReserva;
 
 import java.io.Serializable;
 import java.util.List;
@@ -70,7 +68,7 @@ public class frmPelicula implements Serializable {
             public int count(Map<String, FilterMeta> map) {
                 try {
 
-                    return  (int) pBean.count();
+                    return  (int) pBean.Count();
                 }catch (Exception e){
                     e.printStackTrace();
                     ///TODO: Enviar mensaje de error de acceso
@@ -134,7 +132,7 @@ public class frmPelicula implements Serializable {
 
     public void btnGuardarHandler(ActionEvent actionEvent) {
         try {
-            this.pBean.create(registro);
+            this.pBean.Create(registro);
             this.registro =null;
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Registro guardado"));
         } catch (Exception e) {
@@ -147,7 +145,7 @@ public class frmPelicula implements Serializable {
 
     public void btnEliminarHandler(ActionEvent actionEvent){
         FacesMessage mensaje = new FacesMessage();
-        pBean.delete(registro.getIdPelicula());
+        pBean.Delete(registro.getIdPelicula());
         mensaje.setSeverity(FacesMessage.SEVERITY_INFO);
         mensaje.setSummary("Registro eliminado con exito");
         facesContext.addMessage(null, mensaje);
@@ -162,7 +160,7 @@ public class frmPelicula implements Serializable {
     }
 
     public void btnModificarHandler(ActionEvent actionEvent) {
-        Pelicula actualizado= pBean.update(registro);
+        Pelicula actualizado= pBean.Update(registro);
         FacesMessage mensaje= new FacesMessage();
         if(actualizado!=null){
             this.registro =null;

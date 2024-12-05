@@ -7,7 +7,7 @@ import jakarta.persistence.*;
 public class PeliculaCaracteristica {
     @Id
     @Column(name = "id_pelicula_caracteristica", nullable = false)
-    private Long id;
+    private Long idPeliculaCaracteristica;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_tipo_pelicula")
@@ -19,14 +19,14 @@ public class PeliculaCaracteristica {
 
     @Lob
     @Column(name = "valor")
-    private String valor;
+    private String valorPeliculaCaracteristica;
 
-    public Long getId() {
-        return id;
+    public Long getIdPeliculaCaracteristica() {
+        return idPeliculaCaracteristica;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setIdPeliculaCaracteristica(Long id) {
+        this.idPeliculaCaracteristica = id;
     }
 
     public sv.edu.ues.occ.ingenieria.prn335_2024.cine.Entity.TipoPelicula getIdTipoPelicula() {
@@ -45,12 +45,12 @@ public class PeliculaCaracteristica {
         this.idPelicula = idPelicula;
     }
 
-    public String getValor() {
-        return valor;
+    public String getValorPeliculaCaracteristica() {
+        return valorPeliculaCaracteristica;
     }
 
-    public void setValor(String valor) {
-        this.valor = valor;
+    public void setValorPeliculaCaracteristica(String valor) {
+        this.valorPeliculaCaracteristica = valor;
     }
 
 }

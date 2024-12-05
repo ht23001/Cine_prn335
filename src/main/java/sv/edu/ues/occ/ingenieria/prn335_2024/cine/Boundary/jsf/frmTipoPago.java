@@ -6,6 +6,7 @@ import jakarta.enterprise.context.SessionScoped;
 import sv.edu.ues.occ.ingenieria.prn335_2024.cine.Control.TipoPagoBean;
 import sv.edu.ues.occ.ingenieria.prn335_2024.cine.Entity.TipoPago;
 
+
 import java.util.List;
 import java.util.Optional;
 

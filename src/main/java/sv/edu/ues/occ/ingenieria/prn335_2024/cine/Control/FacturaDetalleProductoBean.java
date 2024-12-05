@@ -4,7 +4,7 @@ import jakarta.ejb.LocalBean;
 import jakarta.ejb.Stateless;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
-import sv.edu.ues.occ.ingenieria.prn335_2024.cine.Entity.Asiento;
+
 import sv.edu.ues.occ.ingenieria.prn335_2024.cine.Entity.FacturaDetalleProducto;
 
 import java.io.Serializable;
